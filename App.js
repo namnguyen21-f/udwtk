@@ -1,19 +1,27 @@
 import express from 'express'
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose'
-import logger from 'morgan';
 import dotenv from 'dotenv';
-const app = express();
+import { fileURLToPath } from 'url';
+import path, {dirname} from 'path';
 import router from './src/routes/main.js'
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use('/api/', router);
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const app = express();
 
 mongoose.Promise = global.Promise;
 const db = mongoose.connection;
 
+
+app.use(express.static('public'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use('/api/', router);
+app.set("view engine", "ejs"); 
 dotenv.config();
-process.env.TOKEN_SECRET;
+
 
 const port = 5035;
 

@@ -14,7 +14,6 @@ export function authenticateToken(req, res, next) {
         message: 'Token is not available',
         });
       req.user = user;
-      console.log(user);
       next(); // pass the execution off to whatever request the client intended
     })
 }

@@ -3,7 +3,7 @@ import user from '../model/user.js'
 import {generateAccessToken} from '../ulti/generateToken.js'
 
 export function Login (req,res) {
-    return user.findOne({username: req.body.username},(err, user) => {
+    return user.findOne({email: req.body.email},(err, user) => {
         if (user) {
             return user;
         }else{
@@ -14,7 +14,7 @@ export function Login (req,res) {
         }
   
     }).then(user =>{
-        const token = generateAccessToken(user.username);
+        const token = generateAccessToken(user.email);
         return res.status(200).json({
             success: true,
             message: 'Login Successful',
@@ -39,11 +39,12 @@ export function Signup (req,res) {
         password: req.body.password,
         passwordConfirm: req.body.passwordConfirm,
         email: req.body.email,
+        role: "user",
         createdAt: new Date(),
     })
 
     return newUser.save().then((data) =>{
-        const token = generateAccessToken(user.username);
+        const token = generateAccessToken(user.email);
         return res.status(200).json({
             success: true,
             message: 'Login Successful',
@@ -52,7 +53,6 @@ export function Signup (req,res) {
         })
     })
     .catch((error) => {
-        console.log(error);
         return res.status(500).json({
         success: false,
         message: 'Server error. Please try again.',
@@ -62,7 +62,7 @@ export function Signup (req,res) {
 }
 
 export function ChangePassword (req,res) {
-    return user.findOneAndUpdate({username: req.user.username}, {password : req.body.newPassword}, {new: true,upsert: false} ,(err,doc)=> {
+    return user.findOneAndUpdate({email: req.user.email}, {password : req.body.newPassword}, {new: true,upsert: false} ,(err,doc)=> {
         if (doc) {
             return doc;
         }else{
@@ -72,7 +72,7 @@ export function ChangePassword (req,res) {
             });
         }
     }).then((newUser) =>{
-        const token = generateAccessToken(newUser.username);
+        const token = generateAccessToken(newUser.email);
         return res.status(200).json({
             success: true,
             message: 'Login Successful',

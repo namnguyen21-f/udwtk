@@ -1,5 +1,4 @@
 import mongoose from 'mongoose'
-import filmSchema from '../model/film'
 import film from '../model/film.js';
 
 export function NewFilm (req,res) {
@@ -24,6 +23,7 @@ export function NewFilm (req,res) {
                 Duration: req.body.duaration,
                 Quality: req.body.quality, 
                 Views: req.body.views, 
+                Handle: req.body.user.username,
                 createdAt : new Date().toISOString,
             })
             return newfilm.save().then(film =>{
