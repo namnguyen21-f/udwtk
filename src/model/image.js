@@ -17,6 +17,10 @@ const imageSchema = new mongoose.Schema({
     handle : {
         type: String,
         required: true,
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now,
     }
 
 })

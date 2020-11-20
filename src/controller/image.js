@@ -14,6 +14,7 @@ export function UploadImage (req,res) {
             contentType: "image/jpeg"
         },
         handle: req.user.username,
+        createdAt : new Date().toISOString,
     });
 
     return imageUpload.save().then((data) => {
