@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import path, {dirname} from 'path';
 import router from './src/routes/main.js'
+import fetch from 'node-fetch'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -16,29 +17,46 @@ const db = mongoose.connection;
 
 
 app.use(express.static('public'));
-app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(express.json({limit:'1mb'}))
 app.use('/api/', router);
 app.set("view engine", "ejs"); 
 
 dotenv.config();
-
-
 const port = 5035;
 
 app.get('/', function(req, res) {
-  var drinks = [
-      { name: 'Bloody Mary', drunkness: 3 },
-      { name: 'Martini', drunkness: 5 },
-      { name: 'Scotch', drunkness: 10 }
-  ];
-  var tagline = "Any code of your own that you haven't looked at for six or more months might as well have been written by someone else.";
+    var items=[];
+    fetch('http://localhost:5035/api/getimage',{
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: "POST",
+      body: JSON.stringify({imageid : "5fb37ae6385f501e1c4136fc"})
+    }).then(res => res.json())
+    .then(data =>{
+      console.log(data.image.image.data);
+      items.push(data.image);
+    }).then(() => {
+      res.render('pages/homepage', {
+        items: items,
+      });
+    }) 
+});
 
-  res.render('pages/homepage', {
-      drinks: drinks,
-      tagline: tagline
+app.get('/login', function(req, res) {
+  res.render('pages/loginpage', {
   });
 });
+
+
+
+app.get('/register', function (req, res, next) {
+  res.render('pages/registerpage', {});
+  
+})
 
 
 app.listen(port, (request, respond) => {

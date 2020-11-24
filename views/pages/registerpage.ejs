@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head.ejs') %>
+
+  </head>
+  <body class="container">
+    <header><%- include('../partials/header.ejs') %></header>
+    <main>
+      <div class="jumbotron">
+        <h1>This is great</h1>
+        <p>Welcome to templating using EJS</p>
+      </div>
+      <form action='/login' id="register" method="POST">
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" placeholder=""><br>
+        <label for="username">Name:</label><br>
+        <input type="text" id="username" name="username" placeholder=""><br>
+        <label for="password">Password:</label><br>
+        <input type="text" id="password" name="password" placeholder=""><br><br>
+        <label for="passwordConfirm">PasswordConfirm:</label><br>
+        <input type="text" id="passwordConfirm" name="passwordConfirm" placeholder=""><br><br>
+      
+        <input type="submit" class="submit" value="Submit">
+
+      </form>
+      
+    </main>
+
+    <footer><%- include('../partials/head.ejs') %></footer>
+
+    <script type="text/javascript">
+      const form = document.getElementById("register");
+      form.addEventListener('submit',(e)=>{
+        e.preventDefault();
+        const data = {};
+        $.ajax({
+          url: '/api/signup',
+          data: JSON.stringify({email : form.elements[0].value, username : form.elements[1].value, password : form.elements[1].value, passwordConfirm : form.elements[1].value}),
+          processData: false,
+          type: 'POST',
+          contentType: 'application/json',
+          success: function (data) {
+            localStorage.setItem('Authorization','Bearer ' + data.token);
+            window.location.href = "/";
+          }
+        });
+      })
+    </script>
+  </body>
+</html>

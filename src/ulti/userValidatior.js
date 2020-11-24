@@ -2,7 +2,8 @@ import user from '../model/user.js'
 
 export function userValidatior (req,res,next) {
     const error = [];
-    user.findOne({email: req.body.email,username: req.body.username},(err, user) => {
+   
+    user.findOne({email: req.body.email},(err, user) => {
         if (user) return res.status(400).json({error: "Email or Username has been registerd"});
         else{
             const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

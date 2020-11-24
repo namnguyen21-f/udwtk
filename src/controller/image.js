@@ -32,5 +32,21 @@ export function UploadImage (req,res) {
         }
         
     })
+}
+
+export function GetImage (req,res) {
+    image.findOne({_id: req.body.imageid},(err,img)=>{}).then(img =>{
+        if (!img) {
+            return res.status(400).json({
+                success: false,
+                message: 'Image have not been found',
+            }); 
+        }else{
+            return res.status(200).json({
+                success: false,
+                image: img,
+            }); 
+        }
+    })
     
 }
