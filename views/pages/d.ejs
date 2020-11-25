@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head.ejs') %>
+  </head>
+  <body class="container">
+    <header><%- include('../partials/header.ejs') %></header>
+
+    <main>
+      <form  id="newFilm" >
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" placeholder=""><br>
+        <label for="subname">Subname:</label><br>
+        <input type="text" id="subname" name="subname" placeholder=""><br><br>
+        <label for="type">Type:</label><br>
+        <input type="text" id="type" name="type" placeholder=""><br>
+        <label for="dateAired">DateAired:</label><br>
+        <input type="text" id="dateAired" name="dateAired" placeholder=""><br><br>
+        <label for="status">Status:</label><br>
+        <input type="text" id="status" name="status" placeholder=""><br><br>
+        <label for="gerne">Gerne:</label><br>
+        <input type="text" id="gerne" name="gerne" placeholder=""><br><br>
+        <label for="scores">Scores:</label><br>
+        <input type="text" id="scores" name="scores" placeholder=""><br><br>
+        <label for="rating">Rating:</label><br>
+        <input type="text" id="rating" name="rating" placeholder=""><br><br>
+        <label for="duration">Duration:</label><br>
+        <input type="text" id="duration" name="duration" placeholder=""><br><br>
+        <label for="quality">Quality:</label><br>
+        <input type="text" id="quality" name="quality" placeholder=""><br><br>
+        <label for="views">Views:</label><br>
+        <input type="text" id="views" name="views" placeholder=""><br><br>
+        <label for="handle">Handle:</label><br>
+        <input type="text" id="handle" name="handle" placeholder=""><br><br>
+      </form>
+      <% items.forEach(function(image) { %> 
+        <div> 
+            <div> 
+                <img src="data:image/<%=image.image.contentType%>;base64, 
+                     <%=image.image.data.toString('base64')%>"> 
+                <div> 
+                    <h5><%= image.name %></h5> 
+                </div> 
+            </div> 
+        </div> 
+      <% }) %> 
+      
+    </main>
+
+    <footer><%- include('../partials/head.ejs') %></footer>
+    <script type="text/javascript">
+        const form = document.getElementById("newFilm");
+        form.addEventListener('submit',(e)=>{
+          e.preventDefault();
+          var data = {};
+          form.elements.forEach(ele => {
+            data[ele.name] = ele.value;
+          })
+          console.log(data);
+          $.ajax({
+            url: '/api/newfilm',
+            data: JSON.stringify(data),
+            processData: false,
+            type: 'POST',
+            contentType: 'application/json',
+            success: function (data) {
+                
+            }
+          });
+        })
+      </script>
+  </body>
+</html>

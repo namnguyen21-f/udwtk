@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-export function generateAccessToken(username) {
+export function generateAccessToken(email) {
     // expires after half and hour (1800 seconds = 30 minutes)
-    return jwt.sign({username: username}, 'secretValue', { expiresIn: '1800s' });
+    return jwt.sign({email: email}, 'secretValue', { expiresIn: '1800s' });
   }

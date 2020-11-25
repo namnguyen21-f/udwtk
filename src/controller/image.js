@@ -2,36 +2,43 @@ import mongoose from 'mongoose'
 import fs from 'fs';
 import path, {dirname} from 'path';
 import image from '../model/image.js';
+import cloudinary from '../ulti/cloudinary.js'
+import resizeimage from '../ulti/resizeimage.js'
 const __dirname = path.resolve();
 
-export function UploadImage (req,res) {
-    const imageUpload = new image({
-        _id: mongoose.Types.ObjectId(),
-        name: req.body.name,
-        index: req.body.index,
-        image: {
-            data : fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
-            contentType: "image/jpeg"
-        },
-        handle: req.user.username,
-        createdAt : new Date().toISOString,
-    });
+export function UploadImage (req,res,next) {
+    if (req.body.setwidth != null && req.body.setheight != null){
+        resizeimage(__dirname + "/uploads/" + req.file.filename, 'jpg', req.body.setimagewidth , req.body.setimageheight);
+    }
+    cloudinary.v2.uploader.upload(__dirname + "/uploads/" + req.file.filename, (err,result)=>{
+        if (result) {
+            const imageUpload = new image({
+                _id: mongoose.Types.ObjectId(),
+                name: req.body.imagename,
+                url: result.url,
+                handle: req.user.username,
+                createdAt : new Date().toISOString(),
+            });
+            return imageUpload.save().then((data) => {
+                if (data) {
+                    req.body.imageurl = result.url;
+                    next();
+                }else{
+                    return res.status(400).json({
+                        message: 'Upload Image Failed',
+                    })
+                }
 
-    return imageUpload.save().then((data) => {
-        if (data) {
-            return res.status(200).json({
-                success: true,
-                message: 'Upload Image Successful',
-        
             })
         }else{
             return res.status(400).json({
-                message: 'Upload Image Failed',
-            
+                message: err,
             })
         }
-        
+    
     })
+
+    
 }
 
 export function GetImage (req,res) {

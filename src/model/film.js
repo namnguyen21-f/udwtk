@@ -53,11 +53,13 @@ const filmSchema = new mongoose.Schema({
         trim: true
     },
     Image: {
-        name: String,
+        type: String,
     },
     Handle : {
         type: String,
-        required: true,
+    },
+    IsTopview:{
+        type: String,
     },
     createdAt: {
         type: Date,
@@ -65,4 +67,4 @@ const filmSchema = new mongoose.Schema({
     }
   });
 
-export default mongoose.model('film',filmSchema);
+export default mongoose.model('film', filmSchema);

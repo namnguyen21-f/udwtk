@@ -1,73 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <%- include('../partials/head.ejs') %>
-  </head>
-  <body class="container">
-    <header><%- include('../partials/header.ejs') %></header>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime</title>
+    
+    <link rel="stylesheet" href="../../public/css/styles.css">
+</head>
+<body>
+    <div class="firstWeb">
+        <h2>colorlib.</h2>
+        <h3>+ ANIME</h3>
+    </div>
+    <nav class="linkMain">
+        <a href="#" class="animeText">Ani<span style="color:red">me</span></a>
+        <div class="linkCenter">
+            <a href="#" class="linkChild">Homepage</a>
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Catetories <span class="carret"></span> </button>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Categories</a></li>
+                    <li><a href="#">Anime Details</a></li>
+                    <li><a href="#">Anime Watching</a></s></li>
+                    <li><a href="#">Blog Details</a></li>
+                    <li><a href="#">Sign up</a></li>
+                    <li><a href="#">Login</a></li>
+                </ul>
+            </div>
+            <a href="#" class="linkChild">Our Blog</a>
+            <a href="#" class="linkChild">Contacts</a>
+        </div>
+    </nav>
+    <div class="container">
+        <section id="myCarousel" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+            </ol>
+            <div class="carousel-inner divImgCenter">
+                <div class="carousel-item active">
+                    <img src="images/1.jpg" alt="image" class="imageCenter">  
+                </div>
+                <div class="carousel-item">
+                    <img src="images/3.jpg" alt="image" class="imageCenter">
+                </div>
+                <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </a>
+                <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </a>
+                <div class="textImgCenter">
+                    <h2>Fate / Stay Night: Unlimited Blade Works</h2>
+                    <p>After 30 days of travel across the world...</p>
+                </div>
+            </div>
+            
+        </section>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 trending">
+                    <% items.forEach(function(item) { %>
+                        <div class="row">
+                            <h4 class="col-lg-6"><%= item.title %></h4>
+                        </div>
+                        <div class="row">
+                            <% item.data.forEach(function(ele) { %>
+                                <div class="col-lg-4 col-md-6 col-sm-6 card">
+                                    <img class="card-img-top" src="url(' + <%= ele.Image%> + ')" alt="image">    
+                                    <a href="#" class="card-text"><%= ele.name %></a>
+                                </div>
+                            <% }) %>
+                        </div>
+                    <% }) %>         
+                </div>
+                <div class="col-lg-4">
+                    <div class="topViews">
+                        <div class="row">
+                            <h4 class="col-lg-6">TOP VIEWS</h4>
+                            <div class="col-lg-6 listTopViews">
+                                <a href="#" style="color: white">Day</a>
+                                <a href="#">Week</a>
+                                <a href="#">Month</a>
+                                <a href="#">Year</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 card">
+                                <img class="card-img-top" src="images/7.jpg" alt="image">    
+                                <a href="#" class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</a>
+                                
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 card">
+                                <img class="card-img-top" src="images/8.jpg" alt="image">    
+                                <a href="#" class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</a>
+                                
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 card">
+                                <img class="card-img-top" src="images/9.PNG" alt="image">       
+                                <a href="#" class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</a>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="newComment">
+                        <div class="row">
+                            <h5 class="col-lg-12">NEW COMMNET</h5>
+                        </div>
+                        <% comments.forEach(function(comment) { %>
+                            <div>
+                               <h5><p><% commnent.content %></p></h5>
+                            </div>
+                        <% }) %> 
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="footer">
+        <a href="#" class="animeText2">Ani<span style="color:red;">me</span></a>
+        <div class="linkFooter">
+            <a href="#" class="linkChild">Homepage</a>
+            <a href="#" class="linkChild">Categories</a>
+            <a href="#" class="linkChild">Our Blog</a>
+            <a href="#" class="linkChild">Contacts</a>
+        </div>
+    </nav>
+    
 
-    <main>
-      <form  id="newFilm" >
-        <label for="name">Name:</label><br>
-        <input type="text" id="name" name="name" placeholder=""><br>
-        <label for="subname">Subname:</label><br>
-        <input type="text" id="subname" name="subname" placeholder=""><br><br>
-        <label for="type">Type:</label><br>
-        <input type="text" id="type" name="type" placeholder=""><br>
-        <label for="dateAired">DateAired:</label><br>
-        <input type="text" id="dateAired" name="dateAired" placeholder=""><br><br>
-        <label for="status">Status:</label><br>
-        <input type="text" id="status" name="status" placeholder=""><br><br>
-        <label for="gerne">Gerne:</label><br>
-        <input type="text" id="gerne" name="gerne" placeholder=""><br><br>
-        <label for="scores">Scores:</label><br>
-        <input type="text" id="scores" name="scores" placeholder=""><br><br>
-        <label for="rating">Rating:</label><br>
-        <input type="text" id="rating" name="rating" placeholder=""><br><br>
-        <label for="duration">Duration:</label><br>
-        <input type="text" id="duration" name="duration" placeholder=""><br><br>
-        <label for="quality">Quality:</label><br>
-        <input type="text" id="quality" name="quality" placeholder=""><br><br>
-        <label for="views">Views:</label><br>
-        <input type="text" id="views" name="views" placeholder=""><br><br>
-        <label for="handle">Handle:</label><br>
-        <input type="text" id="handle" name="handle" placeholder=""><br><br>
-      </form>
-      <% items.forEach(function(image) { %> 
-        <div> 
-            <div> 
-                <img src="data:image/<%=image.image.contentType%>;base64, 
-                     <%=image.image.data.toString('base64')%>"> 
-                <div> 
-                    <h5><%= image.name %></h5> 
-                </div> 
-            </div> 
-        </div> 
-      <% }) %> 
-      
-    </main>
-
-    <footer><%- include('../partials/head.ejs') %></footer>
-    <script type="text/javascript">
-        const form = document.getElementById("newFilm");
-        form.addEventListener('submit',(e)=>{
-          e.preventDefault();
-          var data = {};
-          form.elements.forEach(ele => {
-            data[ele.name] = ele.value;
-          })
-          console.log(data);
-          $.ajax({
-            url: '/api/newfilm',
-            data: JSON.stringify(data),
-            processData: false,
-            type: 'POST',
-            contentType: 'application/json',
-            success: function (data) {
-                
-            }
-          });
-        })
-      </script>
-  </body>
+</body>
 </html>

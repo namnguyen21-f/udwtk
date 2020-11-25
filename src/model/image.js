@@ -8,15 +8,13 @@ const imageSchema = new mongoose.Schema({
     },
     index: {
         type: String,
-        required: true,
     },
-    image: {
-        data : Buffer,
-        contentType: String,
+    url: {
+        type: String,
+
     },
     handle : {
         type: String,
-        required: true,
     },
     createdAt: {
         type: Date,

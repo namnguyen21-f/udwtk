@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url';
 import path, {dirname} from 'path';
 import router from './src/routes/main.js'
 import fetch from 'node-fetch'
+import cloudinary from './src/ulti/cloudinary.js'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -14,6 +15,7 @@ const app = express();
 
 mongoose.Promise = global.Promise;
 const db = mongoose.connection;
+
 
 
 app.use(express.static('public'));
@@ -27,23 +29,17 @@ dotenv.config();
 const port = 5035;
 
 app.get('/', function(req, res) {
-    var items=[];
-    fetch('http://localhost:5035/api/getimage',{
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      method: "POST",
-      body: JSON.stringify({imageid : "5fb37ae6385f501e1c4136fc"})
-    }).then(res => res.json())
-    .then(data =>{
-      console.log(data.image.image.data);
-      items.push(data.image);
-    }).then(() => {
+  fetch(__dirname + '/api/getallfilm')
+  .then(response => response.json())
+  .then(data => {
+    if (data) {
+      console.log(data);
       res.render('pages/homepage', {
-        items: items,
+        items: data,
       });
-    }) 
+    }
+  });
+    
 });
 
 app.get('/login', function(req, res) {
