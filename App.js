@@ -31,7 +31,7 @@ app.get('/',async function(req, res) {
   var carousels = [];
   var items = [];
   var topviews  = [];
-  await fetch('http://localhost:5035/api/getallfilm',{
+  await fetch(`http://localhost:${process.env.PORT}/api/getallfilm`,{
     method: 'POST', 
     headers: {
       'Content-Type': 'application/json'
@@ -93,7 +93,7 @@ app.get('/signup', function(req, res) {
 
 app.get('/anime/:animeName',function(req,res){
   
-  fetch(`http://localhost:5035/api/anime/${req.params.animeName}`)
+  fetch(`http://localhost:${process.env.PORT}/api/anime/${req.params.animeName}`)
   .then(response => response.json())
   .then(data => {
     res.render('pages/animedetail', {animeData : data.data});
