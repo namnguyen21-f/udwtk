@@ -1,0 +1,135 @@
+
+*{
+    box-sizing: border-box;
+    color: #fff;
+    font-size: 16px;
+}
+
+body{
+    background-color: #0b0c2a;
+}
+
+.banner-container {
+    overflow: hidden;
+    position: relative;
+}
+
+.img-banner {
+    background: url('https://res.cloudinary.com/dk5lunsyj/image/upload/v1606541841/background_yztlnb.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 216px;
+}
+
+.text-banner {
+    position: absolute;
+    color: white;
+    top: 30%;
+}
+
+.text-banner h1{
+    font-size: 32px;font-weight: 600;
+}
+
+.text-banner p{
+    font-size: 18px;
+}
+
+.signup-body{
+    background: #0b0c2a;
+}
+
+
+.submit-signup-button {
+    border: 0;
+    background-color: #ea4335;
+    display: block;
+    margin-bottom: 2rem;
+    padding: 8px 16px;
+    border-radius: 2px;
+    letter-spacing: 2px;
+    font-weight: 600;
+    font-size: 16px;
+    width: fit-content;
+}
+
+.signup-body-container {
+    padding-top: 12rem;
+    padding-bottom: 12rem;
+}
+
+.signup-header{
+    font-size: 20px;
+    text-transform: uppercase;
+
+}
+
+.input-email, .input-name, .input-password, .signup-header, .login-with-header3, .facebook, .google, .twitter {
+    margin-bottom: 1.5rem;
+}
+
+.input-email-field, .input-name-field, .input-password-field {
+    padding: 0.75rem;
+    width: 70%;
+    padding-left: 3.5rem;
+    color: #333;
+}
+
+.input-email span, .input-name span, .input-password span {
+    position: absolute;
+    left: 32px;
+    margin-top: 0.7rem;
+    margin-bottom: 0.7rem;
+}
+
+.input-email span i, .input-name span i, .input-password span i{
+    margin-left : -5px;
+    margin-top: 4px;
+}
+
+.fa-envelope {
+    font-size: 20px;
+}
+
+.fa-user {
+    font-size: 23px;
+}
+
+.fa-lock {
+    font-size: 25px;
+}
+
+/* FIELD LOGIN WITH */
+/* ICON LOGIN WITH BAR */
+.fa-facebook, .fa-google, .fa-twitter {
+    position: absolute;
+    color: white;
+    font-size: 20px;
+    left: 32px;
+}
+
+.facebook, .google, .twitter {
+    width: 70%;
+    letter-spacing: 2px;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 0.85rem 0;
+}
+
+.facebook {
+    background-color: #3e5998;
+}
+
+.google {
+    background-color: #ea4335;
+}
+
+.twitter {
+    background-color: #00acee;
+}
+
+/* TURN OFF DECOR HOVER LOGIN WITH */
+.signup-container a:hover, .login-with-container a:hover {
+    text-decoration: none;
+}

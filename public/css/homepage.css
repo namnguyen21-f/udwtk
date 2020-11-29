@@ -1,6 +1,19 @@
+*{
+    box-sizing: border-box;
+    color: #fff;
+    font-size: 16px;
+}
+
+a{
+    text-decoration: none !important;    
+} 
+
 body{
-    background-color: #023e8a;
     margin: 0rem;
+}
+
+.mainSection{
+    background-color: #0b0c2a;
 }
 
 img{
@@ -11,63 +24,22 @@ a:hover{
     text-decoration: none;
 }
 
-.firstWeb{
-    background-color: #343a40;
-    position: fixed;
-    width: 100%;
-    padding: 0 1rem;
-    z-index: 1;
-    
-}
-
-.firstWeb h2{
-    color: aliceblue;
-    display: inline-block;
-    font-size: 2.5rem; 
-    margin: 0;
-    
-}
-
-.firstWeb h3{
-    color: aliceblue;
-    display: inline-block;
-    padding: 1rem;
-    background-color: #212529;
-    margin: 0;
-    
-}
-
- a{
-    color: aliceblue;
-    text-decoration: none;
-    
-}
-
-.animeText{
-    display: inline;
-    font-size: 30px;
-    padding-left: 15px;
-}
-
-.linkMain{
-    background-color: #001845;
-    padding-top: 80px;
-    padding-bottom: 30px;
-}
-
-.linkCenter{
-    display: inline;
-    margin-left: 400px;
-}
-
-.linkChild{
-    padding-left: 1rem;
-    padding-right: 1rem;
-    text-align: center;
+.carousel{
+    margin: 64px 0;
+    border-radius: 4px;
 }
 
 .divImgCenter{
     position: relative;
+    height: 550px;
+}
+
+.divImgCenter .carousel-item{
+    width: 100%;
+    height: 100%;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .imageCenter{
@@ -78,11 +50,32 @@ a:hover{
 
 .textImgCenter{
     position: absolute;
-    left: 100px;
-    bottom: 150px;
-    width: 400px;
+    left: 8%;
+    bottom: 12%;
+    max-width: 45%;
     color: white;
 }
+
+.textImgCenter h1{
+    font-size: 40px;
+}
+
+.textImgCenter a{
+    display: block;
+    width: fit-content;
+    font-size: 16px;
+    padding: 10px 20px;
+    font-weight: bolder;
+    background: #e53637;
+    margin-top: 32px;
+    border-radius: 4px;
+}
+
+.textImgCenter a i{
+    margin-left: 6px;
+ 
+}
+
 
 li a{
     color: black;    
@@ -96,20 +89,151 @@ li a{
     padding: 0px;
 }
 
-.trending img{
-    width: 240px;
-    height: 300px;
+.card .card__img{
+    position: relative;
 }
 
-.topViews img{
-    height: 250px;
+.card .card__img img{
+    border-radius: 4px;
 }
+
+.card .card__img span{
+    position: absolute;
+    display: block;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 8px;
+    padding: 4px 6px;
+    font-weight: bold;
+}
+
+.card .card__img span i {
+    margin-right: 4px;
+}
+
+.card .card__img span:nth-of-type(1){
+    top: 10px;
+    left: 10px;
+    background: #e53637;
+}
+
+.card .card__img span:nth-of-type(2){
+    bottom : 8px;
+    left: 10px;
+    background: #3d3d3d;
+}
+
+
+.card .card__img img{
+    width: 100%;
+    min-height: 300px;
+    height: auto;
+}
+
+.card a{
+    margin-top: 4px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.trending__title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.trending__title h4{
+    font-size: 24px;
+    line-height: 30px;
+    padding-left: 12px;
+    border-left: 4px solid #e53637;
+    text-transform: uppercase;
+}
+
+.trending__title a{
+    font-size: 16px;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.trending__title a i{
+    margin-left: 10px;
+}
+
+.topViews h4{
+    font-size: 24px;
+    line-height: 30px;
+    padding-left: 12px;
+    border-left: 4px solid #e53637;
+    text-transform: uppercase;
+}
+
+.topViews .topViews__nav ul{
+    border: 0;
+}
+
+.topViews .tab-content .active{
+    opacity: 1 !important;
+}
+
+.topViews .tab-content .tab-pane{
+    padding: 0;
+}
+
+.topViews .tab-content .tab-pane .topViews__items{
+    position: relative;
+    width: 100%;
+    height: 120px;
+    background-position: center -100px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-top: 8px;
+}
+
+
+.topViews .tab-content .tab-pane .topViews__items::before{
+    content: "";
+    background-color: rgba(0,0,0,0.1);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.topViews .tab-content .tab-pane .topViews__items a{
+    position: absolute;
+    bottom: 10px;
+    left: 6px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    z-index: 2;
+}
+
+.topViews .topViews__nav ul li a{
+    color: #fff;
+    font-size: 14px;
+}
+
+.topViews .topViews__nav ul li a.active{
+    background-color: #5c6e91;
+    border: 0;
+    color: #fff;
+}
+
+
 
 .card{
-
-    background-color:#023e8a;
-    border: none;
     margin-bottom: 25px;
+    border: 0 !important;
+    background: transparent !important;
+    border-radius: 4px;
+}
+
+.card a{
+    font-size: 18px;
 }
 
 a:hover, .row h4{
@@ -122,32 +246,16 @@ a:hover, .row h4{
 
 .listTopViews a{
     color: lightslategray;
+    font-size: 16px;
+    margin-left: 4px;
 }
 
-.newComment img{
-    float: left;
-    margin-right: 15px;
+.newComment h4{
+    font-size: 24px;
+    line-height: 30px;
+    padding-left: 12px;
+    border-left: 4px solid #e53637;
+    text-transform: uppercase;
+    margin-top: 24px;
 }
 
-.newComment>div{
-    overflow: hidden;
-    margin-bottom: 15px;
-    color: white;
-}
-
-.footer{
-    height: 100px;
-    background-color: #001845;
-    padding-top: 40px;
-}
-
-.animeText2{
-    display: inline;
-    padding-left: 15px;
-    font-size: 30px;
-}
-
-.linkFooter{
-    display: inline;
-    margin-left: 400px;
-}

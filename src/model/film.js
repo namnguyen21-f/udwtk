@@ -55,10 +55,16 @@ const filmSchema = new mongoose.Schema({
     Image: {
         type: String,
     },
+    ImageBanner: {
+        type: String,
+    },
     Handle : {
         type: String,
     },
     IsTopview:{
+        type: String,
+    },
+    Rank: {
         type: String,
     },
     createdAt: {

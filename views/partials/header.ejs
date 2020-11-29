@@ -1,19 +1,31 @@
-<!-- views/partials/header.ejs -->
 
-<nav class="navbar navbar-default" role="navigation">
-    <div class="container-fluid">
-
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">
-                <span class="glyphicon glyphicon glyphicon-tree-deciduous"></span>
-                EJS Is Fun
-            </a>
+<nav class="linkMain">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <a href="#" class="animeText">Ani<span style="color:red">me</span></a>
+            </div>
+            <div class="d-flex align-items-center">
+                <a href="#" class="linkChild">Homepage</a>
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Catetories <span class="carret"></span> </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Categories</a></li>
+                        <li><a href="#">Anime Details</a></li>
+                        <li><a href="#">Anime Watching</a></s></li>
+                        <li><a href="#">Blog Details</a></li>
+                        <li><a href="#">Sign up</a></li>
+                        <li><a href="#">Login</a></li>
+                    </ul>
+                </div>
+                <a href="#" class="linkChild">Our Blog</a>
+                <a href="#" class="linkChild">Contacts</a>
+            </div>
+            <div class="linkMain__feauture">
+                <a href="#" type="button" class="linkChild"><i class="fa fa-search" aria-hidden="true"></i></a>
+                <a href="#" type="button" class="linkChild"><i class="fa fa-user" aria-hidden="true"></i></a>
+            </div>
         </div>
-
-        <ul class="nav navbar-nav">
-            <li><a href="/">Home</a></li>
-            <li><a href="/about">About</a></li>
-        </ul>
-
     </div>
+    
 </nav>

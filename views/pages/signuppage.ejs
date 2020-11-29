@@ -10,7 +10,7 @@
       <div class="banner-container">
           <div class="img-banner"></div>
           <div class="text-banner text-center w-100">
-              <h1 class="text-signup-banner font-weight-bold">LOGIN</h1><br>
+              <h1 class="text-signup-banner font-weight-bold">Sign Up</h1><br>
               <p class="text-welcome-banner h4">Welcome to the official Anime blog.</p>
           </div>
       </div>
@@ -20,20 +20,25 @@
         <div class="signup-body-container">
             <div class="row">
                 <div class="signup-container col-6 text-white">
-                    <h3 class="signup-header">LOGIN</h3>
+                    <h3 class="signup-header">Sign up</h3>
                     <form id="register" action="#">
                         <div class="input-email">
                             <input class="input-email-field" id="email" type="email" placeholder="Email address"><span><i class="fa fa-envelope text-muted" aria-hidden="true"></i></span>
                         </div>
+                        <div class="input-name">
+                            <input class="input-name-field" id="username" type="text" placeholder="Your Name"><span><i class="fa fa-user text-muted" aria-hidden="true"></i></span>
+                        </div>
                         <div class="input-password">
                             <input class="input-password-field" id="password" type="password" placeholder="Password"><span><i class="fa fa-lock text-muted" aria-hidden="true"></i></span>
                         </div>
+                        <div class="input-password">
+                          <input class="input-password-field" id="passwordConfirm" type="password" placeholder="Confirm Password"><span><i class="fa fa-lock text-muted" aria-hidden="true"></i></span>
+                        </div>
                         <button class="text-white submit-signup-button" type="submit">
-                          LOGIN NOW
+                          SIGN UP
                         </button>
                     </form>
-                    <p>Not have an account?<a href="#">Signup</a></p>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo hic dolorum sit illo consequatur sunt quisquam consectetur expedita ullam eveniet!</p>
+                    <p>Already have an account?<a href="#">Log in!</a></p>
                 </div>
                 <div class="login-with-container col-6 text-white">
                     <h3 class="login-with-header3">Login With</h3>
@@ -64,9 +69,11 @@
         const data = {};
       
         $.ajax({
-          url: '/api/login',
+          url: '/api/signup',
           data: JSON.stringify({email : document.getElementById('email').value,  
-          password : document.getElementById('password').value,}),
+          password : document.getElementById('password').value,
+          passwordConfirm : document.getElementById('passwordConfirm').value,
+          username : document.getElementById('username').value}),
           processData: false,
           type: 'POST',
           contentType: 'application/json',

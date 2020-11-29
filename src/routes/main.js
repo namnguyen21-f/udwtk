@@ -1,6 +1,6 @@
 import express from 'express';
 import {Login,Signup,ChangePassword} from '../controller/user.js'
-import {UpdateFilm,NewFilm,GetAllFilmCategories} from '../controller/film.js'
+import {UpdateFilm,NewFilm,GetAllFilmCategories,GetFilmByRank,GetOneFilm} from '../controller/film.js'
 import {UploadImage,GetImage,} from '../controller/image.js'
 import {userValidatior} from '../ulti/userValidatior.js'
 import {authenticateToken} from '../ulti/verifyToken.js'
@@ -25,6 +25,8 @@ router.post('/changepassword', authenticateToken , ChangePassword);
 router.post('/signup', userValidatior ,Signup);
 router.post('/uploadimage', authenticateToken , upload.single('image'), UploadImage);
 router.post('/getimage', GetImage);
+router.get('/anime/:filmname', GetOneFilm)
 router.post('/newfilm', authenticateToken , upload.single('image'), UploadImage, NewFilm);
-router.get('/getallfilm' , GetAllFilmCategories);
+router.post('/getallfilm' , GetAllFilmCategories);
+router.post('/gettopview' , GetFilmByRank);
 export default router;

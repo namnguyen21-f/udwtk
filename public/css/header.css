@@ -1,0 +1,44 @@
+.animeText{
+    font-size: 30px;
+}
+
+.linkMain{
+    background-color: #070720;
+}
+
+.linkMain .d-flex{
+    height: 100%;
+}
+
+.linkMain .d-flex > a{
+    padding: 20px 16px;
+    font-size: 16px;
+    line-height: 20px;
+    color: #fff;
+    font-weight: bold;
+}
+
+.linkMain .d-flex .dropdown button{
+    padding: 20px 16px;
+    font-size: 16px;
+    line-height: 20px;
+    color: #fff;
+    background: transparent;
+    border: 0;
+}
+
+.linkMain__feauture a{
+    color: #fff;
+    font-size: 20px;
+}
+
+.linkMain .d-flex .dropdown ul li{
+    font-size: 16px;
+    padding: 4px 0;
+}
+
+.linkChild{
+    padding-left: 1rem;
+    padding-right: 1rem;
+    text-align: center;
+}   

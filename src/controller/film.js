@@ -25,7 +25,9 @@ export function NewFilm (req,res) {
                 Quality: req.body.quality, 
                 Views: req.body.views, 
                 Handle: req.user.username,
+                Rank: req.user.rank,
                 Image: req.body.imageurl,
+                ImageBanner: req.body.imagebanner,
                 IsTopview: req.body.istopview,
                 createdAt : new Date().toISOString(),
             })
@@ -85,30 +87,68 @@ export function UpdateFilm (req,res) {
 }
 
 
+export function GetOneFilm(req,res){
+    film.findOne({name: req.params.filmname},(err,data) =>{
+        if (data){
+            return res.status(200).json({
+                success: true,
+                data : data,
+            })
+        }else{
+            return res.status(400).json({
+                success: false,
+            })
+        }
+    })
+}
+
 export function GetAllFilmCategories(req,res){
-    var result = [];
-    var flag = 0;
-    req.body.categories.forEach(ele => 
-        film.aggregate().match({Gerne : { $regex: `/Action/`, $options: 'g' }}).limit(req.body.limit).exec(function(err,doc) {
-            console.log(doc);    
-            if (err){
-                flag = 1;
-                return res.status(400).json({
-                    success: false,
-                    error : err,
-                });
-            }else{
-                var obj = {title: ele};
-                obj.data = doc; 
-                result.push(obj);
-            }
-    }))
-    if (result && flag == 0){
-        return res.status(200).json({
-            success: true,
-            data : result,
-        });
+    const qu = async() =>{
+        try {
+            const process = async () => {
+                var result = [];
+                for (let i=0;i < req.body.categories.length ;i++){
+                    var re = new RegExp(req.body.categories[i],"g");
+                    const ps = await film.find({ Gerne: re}).limit(req.body.limit).exec().then(doc => {
+                        var obj = {title: req.body.categories[i]};
+                        obj.data = doc; 
+                        result.push(obj);
+                    });
+                }
+                return result;
+            };
+            process().then((data) =>{
+                return res.status(200).json({
+                    success: true,
+                    data : data,
+            })
+        })      
+        }
+        catch (error) {
+            return res.status(400).json({
+                success: false,
+
+        })
+        }
     }
+    qu();
+
+}
+
+export function GetFilmByRank(req,res){
+    var re = new RegExp(req.body.rank,"g");
+    film.find({ Rank: re}).limit(req.body.limit).exec().then(doc => {
+        if (doc){
+            return res.status(200).json({
+                success: true,
+                data : doc,
+            })
+        }else{
+            return res.status(400).json({
+                success: false,
+            })
+        }
+    });
 }
 
 
