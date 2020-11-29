@@ -25,7 +25,7 @@ app.use('/api/', router);
 app.set("view engine", "ejs"); 
 
 dotenv.config();
-const port = 5035;
+
 
 app.get('/',async function(req, res) {
   var carousels = [];
