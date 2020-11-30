@@ -33,12 +33,28 @@
 
 #search,
 #account {
-  max-width: 400px;
-  padding: 12px 8px;
-  background: #fff;
+  position: absolute;
   top: 40px;
-  left: 0;
+  right: 0;
   z-index: 10;
+}
+
+#account {
+  background: #fff;
+  padding: 8px 12px;
+}
+
+#account ul li a {
+  font-weight: bold;
+}
+
+#account ul li a:hover {
+  color: red;
+}
+
+#search input {
+  padding: 0 8px;
+  border-radius: 24px;
 }
 
 #search *,

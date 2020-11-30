@@ -1,96 +1,116 @@
-body{
-    background-color: #0b0c2a !important;
+body {
+  background-color: #0b0c2a !important;
 }
 
-*{
-    box-sizing: border-box;
-    color: #fff;
-    font-size: 16px;
+* {
+  box-sizing: border-box;
+  color: #fff;
+  font-size: 16px;
 }
 
-.menuHome{
-    margin-top: 24px;
-    color: white;
-    margin-bottom: 30px;
+.menuHome {
+  margin-top: 24px;
+  color: white;
+  margin-bottom: 30px;
 }
 
-.menuHome a{
-    color: #fff;
+.menuHome a {
+  color: #fff;
 }
 
-.info img{
-    border-radius: 5%;
+.info img {
+  border-radius: 5%;
 }
 
-.info__img img{
-    width: 100%;
-    height: auto;
+.info__img img {
+  width: 100%;
+  height: auto;
 }
 
-.info p, .explain{
-    color: #b7b7b7;
+.info p,
+.explain {
+  color: #b7b7b7;
 }
 
-.explain span{
-    text-align: center;
-    color: white;
+.explain span {
+  text-align: center;
+  color: white;
 }
 
-.rating{
-    text-align: center;
+.rating {
+  text-align: center;
 }
 
-.rating a{
-    color: #e89f12;
-    font-size: 24px;
+.rating a {
+  color: #e89f12;
+  font-size: 24px;
 }
 
-.chooseButton{
-    margin-top: 24px;
+.chooseButton {
+  margin-top: 24px;
 }
 
-.chooseButton button{
-    border: 0;
-    padding: 10px;
-    background-color: #e53637;
-    color: white;
-    text-transform: uppercase;
-    font-weight: bold;
+.chooseButton button {
+  border: 0;
+  padding: 10px;
+  background-color: #e53637;
+  color: white;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
-.beforeList{
-    margin-right: 40px;
+.beforeList {
+  margin-right: 40px;
 }
 
-
-.review img{
-    float: left;
-    border-radius: 50%;
+.review img {
+  float: left;
+  border-radius: 50%;
+  width: 60px;
+  height: auto;
 }
 
-.review div div{
-    margin-left: 80px;
-    margin-bottom: 30px;
-    background-color: #1d1e39;
-    padding: 15px;
-    border-radius: 5px;
+.review div div {
+  margin-left: 80px;
+  margin-bottom: 30px;
+  background-color: #1d1e39;
+  padding: 15px;
+  border-radius: 5px;
 }
 
-.review span, .review p{
-    color: #b7b7b7;
+.review span,
+.review p {
+  color: #b7b7b7;
 }
 
-.comment textarea{
-    height: 90px;
-    width: 100%;
-    border-radius: 5px;
-    margin: 20px 0 20px 0;
+.comment {
+  margin-bottom: 24px;
 }
 
-.comment button{
-    background-color: #e53637;
-    border: 0;
-    padding: 5px 15px 5px 15px;
-    border-radius: 5px;
-    color: white;
+.comment textarea {
+  height: 90px;
+  width: 100%;
+  border-radius: 5px;
+  margin: 20px 0 20px 0;
+}
+
+.comment button {
+  background-color: #e53637;
+  border: 0;
+  padding: 5px 15px 5px 15px;
+  border-radius: 5px;
+  color: white;
+}
+
+.topViews div img {
+  width: 100%;
+  height: auto;
+}
+
+.topViews div a {
+  color: #fff;
+}
+
+.topViews__item {
+  padding: 16px 0;
 }
