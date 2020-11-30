@@ -42,6 +42,7 @@
 #account {
   background: #fff;
   padding: 8px 12px;
+  width: 200px;
 }
 
 #account ul li a {
@@ -50,6 +51,7 @@
 
 #account ul li a:hover {
   color: red;
+  background-color: transparent;
 }
 
 #search input {
