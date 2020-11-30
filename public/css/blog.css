@@ -1,0 +1,43 @@
+.our-blog-body {
+  padding: 4rem 0;
+  background-color: #0b0c2a;
+}
+
+.item {
+  padding-left: 0;
+  padding-right: 0;
+  margin: 8px 0;
+}
+
+.row {
+  margin-left: -8px;
+  margin-right: -8px;
+}
+
+.big-item {
+  height: 35rem;
+}
+
+.small-item {
+  height: 18rem;
+}
+
+.set-poster {
+  position: relative;
+  background-size: cover;
+  background-position: top center;
+}
+
+.text-poster {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  color: white;
+}
+
+/* ICON */
+.fa-calendar {
+  color: #ea4335;
+  margin: 0.5rem;
+  font-size: 15px;
+}
