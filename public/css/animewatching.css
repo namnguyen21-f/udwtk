@@ -60,11 +60,12 @@ review img {
   margin-bottom: 30px;
 }
 
-.videoCenter a {
+.videoCenter div a {
   display: inline-block;
   padding: 10px 20px;
   border-radius: 4px;
-  background-color: #160e7b;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
   margin-right: 15px;
   margin-bottom: 20px;
 }
