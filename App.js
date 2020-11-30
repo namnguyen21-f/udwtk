@@ -89,7 +89,16 @@ app.get('/signup', function(req, res) {
   });
 });
 
-
+app.get('/anime/:animeName/watching', function(req, res) {
+  fetch(`https://gruop08app.herokuapp.com/api/anime/${req.params.animeName}`)
+  .then(response => response.json())
+  .then(data => {
+    res.render('pages/animewatching', {animeData : data.data});
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+});
 
 app.get('/anime/:animeName',function(req,res){
   fetch(`https://gruop08app.herokuapp.com/api/anime/${req.params.animeName}`)

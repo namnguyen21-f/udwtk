@@ -1,0 +1,75 @@
+review img {
+  float: left;
+  border-radius: 50%;
+  width: 60px;
+  height: auto;
+}
+
+.review div div {
+  margin-left: 80px;
+  margin-bottom: 30px;
+  background-color: #1d1e39;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.review span,
+.review p {
+  color: #b7b7b7;
+}
+
+.comment {
+  margin-bottom: 24px;
+}
+
+.comment textarea {
+  height: 90px;
+  width: 100%;
+  border-radius: 5px;
+  margin: 20px 0 20px 0;
+}
+
+.comment button {
+  background-color: #e53637;
+  border: 0;
+  padding: 5px 15px 5px 15px;
+  border-radius: 5px;
+  color: white;
+}
+
+.topViews div img {
+  width: 100%;
+  height: auto;
+}
+
+.topViews div a {
+  color: #fff;
+}
+
+.topViews__item {
+  padding: 16px 0;
+}
+
+.mainSection {
+  padding: 32px 0;
+  background: #0b0c2a;
+}
+
+.menuHome {
+  color: white;
+  margin-bottom: 30px;
+}
+
+.videoCenter a {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 4px;
+  background-color: #160e7b;
+  margin-right: 15px;
+  margin-bottom: 20px;
+}
+
+.videoCenter a:hover {
+  background-color: white;
+  color: black;
+}
