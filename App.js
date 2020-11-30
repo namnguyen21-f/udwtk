@@ -6,7 +6,6 @@ import { fileURLToPath } from 'url';
 import path, {dirname} from 'path';
 import router from './src/routes/main.js'
 import fetch from 'node-fetch'
-import cors from 'cors'
 import cloudinary from './src/ulti/cloudinary.js'
 
 const __filename = fileURLToPath(import.meta.url);
