@@ -92,7 +92,7 @@ app.get('/signup', function(req, res) {
 
 
 app.get('/anime/:animeName',function(req,res){
-  fetch(`/api/anime/${req.params.animeName}`)
+  fetch(`https://gruop08app.herokuapp.com/api/anime/${req.params.animeName}`)
   .then(response => response.json())
   .then(data => {
     res.render('pages/animedetail', {animeData : data.data});
