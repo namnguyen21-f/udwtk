@@ -35,6 +35,34 @@
   color: white;
 }
 
+.banner-container {
+  overflow: hidden;
+  position: relative;
+}
+
+.img-banner {
+  background: url("https://res.cloudinary.com/dk5lunsyj/image/upload/v1606541841/background_yztlnb.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 216px;
+}
+
+.text-banner {
+  position: absolute;
+  color: white;
+  top: 30%;
+}
+
+.text-banner h1 {
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.text-banner p {
+  font-size: 18px;
+}
+
 /* ICON */
 .fa-calendar {
   color: #ea4335;
