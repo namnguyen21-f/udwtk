@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url';
 import path, {dirname} from 'path';
 import router from './src/routes/main.js'
 import fetch from 'node-fetch'
+import cors from 'cors'
 import cloudinary from './src/ulti/cloudinary.js'
 
 const __filename = fileURLToPath(import.meta.url);
@@ -31,7 +32,7 @@ app.get('/',async function(req, res) {
   var carousels = [];
   var items = [];
   var topviews  = [];
-  await fetch(`http://localhost:${process.env.PORT}/api/getallfilm`,{
+  await fetch(`/api/getallfilm`,{
     method: 'POST', 
     headers: {
       'Content-Type': 'application/json'
@@ -49,7 +50,7 @@ app.get('/',async function(req, res) {
   const topviewquery = ['Day','Month','Year'];
 
   for (let i=0;i <topviewquery.length; i++){
-    await fetch('http://localhost:5035/api/gettopview',{
+    await fetch('api/gettopview',{
       method: 'POST', 
       headers: {
         'Content-Type': 'application/json'
@@ -93,7 +94,7 @@ app.get('/signup', function(req, res) {
 
 app.get('/anime/:animeName',function(req,res){
   
-  fetch(`http://localhost:${process.env.PORT}/api/anime/${req.params.animeName}`)
+  fetch(`/api/anime/${req.params.animeName}`)
   .then(response => response.json())
   .then(data => {
     res.render('pages/animedetail', {animeData : data.data});
