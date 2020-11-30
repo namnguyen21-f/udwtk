@@ -28,7 +28,7 @@
                                 <div class="textImgCenter">
                                     <h1><%= item.name%></h1>
                                     <h3><%= item.subname%></h3>
-                                    <a>WATCH NOW<i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                                    <a href="/anime/<%= item.name%>">WATCH NOW<i class="fa fa-arrow-right" aria-hidden="true"></i></a>
                                 </div>
                             </div>
                             <% } else { %>
@@ -36,7 +36,7 @@
                                 <div class="textImgCenter">
                                     <h1><%= item.name%></h1>
                                     <h3><%= item.subname%></h3>
-                                    <a>WATCH NOW<i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                                    <a href="/anime/<%= item.name%>">WATCH NOW<i class="fa fa-arrow-right" aria-hidden="true"></i></a>
                                 </div>
                             </div>
                         <% } %>
@@ -67,7 +67,7 @@
                                         <span><%= ele.Rating%></span>
                                         <span><i class="fa fa-eye" aria-hidden="true"></i><%= ele.Views%></span>
                                     </div>
-                                    <a href="#" class="card-text"><%= ele.name %></a>
+                                    <a href="/anime/<%= item.name%>" class="card-text"><%= ele.name %></a>
                                 </div>
                             <% }) %>
                         </div>
@@ -97,7 +97,7 @@
                                     <div class="tab-pane container active" id="<%= ele.title%>" x>
                                         <% ele.data.forEach(film => { %>
                                             <div class="topViews__items" style="background-image: url('<%= film.Image%>');">
-                                                <a href="#"><%= film.name%></a>
+                                                <a href="/anime/<%= item.name%>"><%= film.name%></a>
                                             </div>
                                         <% }) %> 
                                     </div>
@@ -105,7 +105,7 @@
                                     <div class="tab-pane container fade" id="<%= ele.title%>" >
                                         <% ele.data.forEach(film => { %>
                                             <div class="topViews__items" style="background-image: url('<%= film.Image%>');">
-                                                <a href="#"><%= film.name%></a>
+                                                <a href="/anime/<%= item.name%>"><%= film.name%></a>
                                             </div>
                                         <% }) %> 
                                     </div>

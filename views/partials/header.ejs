@@ -1,4 +1,3 @@
-
 <nav class="linkMain">
     <div class="container">
         <div class="d-flex justify-content-between align-items-center">
@@ -8,22 +7,39 @@
             <div class="d-flex align-items-center">
                 <a href="#" class="linkChild">Homepage</a>
                 <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Catetories <span class="carret"></span> </button>
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Catetories<span class="carret"></span> </button>
                     <ul class="dropdown-menu">
                         <li><a href="#">Categories</a></li>
-                        <li><a href="#">Anime Details</a></li>
-                        <li><a href="#">Anime Watching</a></s></li>
-                        <li><a href="#">Blog Details</a></li>
-                        <li><a href="#">Sign up</a></li>
-                        <li><a href="#">Login</a></li>
+                        <li><a href="/anime/One Punch Man">Anime Details</a></li>
+                        <li><a href="/amime/movie/">Anime Watching</a></s></li>
+                        <li><a href="/blog">Blog Details</a></li>
                     </ul>
                 </div>
                 <a href="#" class="linkChild">Our Blog</a>
                 <a href="#" class="linkChild">Contacts</a>
             </div>
             <div class="linkMain__feauture">
-                <a href="#" type="button" class="linkChild"><i class="fa fa-search" aria-hidden="true"></i></a>
-                <a href="#" type="button" class="linkChild"><i class="fa fa-user" aria-hidden="true"></i></a>
+                <a href="#" type="button" class="linkChild" id="search"><i class="fa fa-search" aria-hidden="true"></i></a>
+                <div class="collapse" id="collapaseSearch">
+                    <input type="text">
+                </div>
+                <a href="#" type="button" class="linkChild" id="account"><i class="fa fa-user" aria-hidden="true"></i></a>
+                <div class="collapse" id="collapaseAccount">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                          <a class="nav-link active" href="/login">Login</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="/signup">Signup</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#">Setting</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link disabled" href="#">FAQ & Policy</a>
+                        </li>
+                      </ul>
+                </div>
             </div>
         </div>
     </div>
