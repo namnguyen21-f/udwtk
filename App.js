@@ -6,12 +6,11 @@ import { fileURLToPath } from 'url';
 import path, {dirname} from 'path';
 import router from './src/routes/main.js'
 import fetch from 'node-fetch'
-import cors from 'cors'
 import cloudinary from './src/ulti/cloudinary.js'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-
+var url = "https://gruop08app.herokuapp.com/";
 const app = express();
 
 mongoose.Promise = global.Promise;
@@ -32,7 +31,7 @@ app.get('/',async function(req, res) {
   var carousels = [];
   var items = [];
   var topviews  = [];
-  await fetch(`/api/getallfilm`,{
+  await fetch(`https://gruop08app.herokuapp.com/api/getallfilm`,{
     method: 'POST', 
     headers: {
       'Content-Type': 'application/json'
@@ -50,7 +49,7 @@ app.get('/',async function(req, res) {
   const topviewquery = ['Day','Month','Year'];
 
   for (let i=0;i <topviewquery.length; i++){
-    await fetch('api/gettopview',{
+    await fetch('https://gruop08app.herokuapp.com/api/gettopview',{
       method: 'POST', 
       headers: {
         'Content-Type': 'application/json'
@@ -92,7 +91,7 @@ app.get('/signup', function(req, res) {
 
 
 
-app.get('/anime/:animeName',function(req,res){
+app.get('https://gruop08app.herokuapp.com/api/anime/:animeName',function(req,res){
   
   fetch(`/api/anime/${req.params.animeName}`)
   .then(response => response.json())
