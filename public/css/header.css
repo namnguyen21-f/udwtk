@@ -94,3 +94,24 @@ a {
   padding-right: 1rem;
   text-align: center;
 }
+
+.auTrue{
+  display: none;
+  text-align: center;
+}
+
+.auTrue .user_image{
+  width: 70px;
+  height: auto;
+}
+
+.auTrue #user_name{
+  font-weight: 750;
+  display: block;
+  text-transform: capitalize;
+}
+
+.auTrue .nav{
+  margin-top: 16px;
+  border-top: 1px solid #333
+}

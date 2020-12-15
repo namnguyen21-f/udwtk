@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import comment from './comment.js'
 
 const filmSchema = new mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
@@ -70,7 +71,8 @@ const filmSchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now,
-    }
-  });
+    },
+    comment: [{type: Schema.Types.ObjectId, ref: 'comment'}],
+  },{timestamps});
 
 export default mongoose.model('film', filmSchema);

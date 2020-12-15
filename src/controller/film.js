@@ -1,5 +1,29 @@
 import mongoose from 'mongoose'
 import film from '../model/film.js';
+import comment from '../model/comment.js';
+
+export function addCommentFilm(req,res){
+    const newCommnent = new comment ({
+        _id: mongoose.Types.ObjectId(),
+        title: req.body.title,
+        handle : req.user.email,
+        type : req.body.type,
+        to : req.body.to,
+        createdAt : new Date().toISOString(),
+    })
+    newCommnent.save(function(err) {
+        if (!err){
+            film.findOne({name: req.body.to},(err,doc) => {
+                doc.comment = doc.comment.add(newCommnent._id);
+                if (doc){
+                    doc.save(function (err) {
+                        if (err) return handleError(err);
+                    });
+                }
+            })
+        }
+    })
+}
 
 export function NewFilm (req,res) {
     film.findOne({name: req.body.name},(err, data) => {

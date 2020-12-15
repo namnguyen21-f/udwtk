@@ -119,7 +119,7 @@ app.get('/anime/:animeName',function(req,res){
 })
 
 
-app.listen(process.env.PORT || 3000, (request, respond) => {
+app.listen(3000, (request, respond) => {
   console.log(`Our server is live on $. Yay!`);
 });
 
