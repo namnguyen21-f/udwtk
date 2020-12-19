@@ -1,7 +1,7 @@
 import express from 'express';
 import {Login,Signup,ChangePassword,GetUser} from '../controller/user.js'
 import {CreateComment,GetComment} from '../controller/comment.js'
-import {UpdateFilm,NewFilm,GetAllFilmCategories,GetFilmByRank,GetOneFilm} from '../controller/film.js'
+import {UpdateFilm,NewFilm,GetAllFilmCategories,GetFilmByRank,GetOneFilm ,addCommentFilm} from '../controller/film.js'
 import {UploadImage,GetImage,} from '../controller/image.js'
 import {userValidatior} from '../ulti/userValidatior.js'
 import {authenticateToken} from '../ulti/verifyToken.js'
@@ -33,5 +33,6 @@ router.post('/getallfilm' , GetAllFilmCategories);
 router.post('/gettopview' , GetFilmByRank);
 router.post('/comment/create' , CreateComment);
 router.post('/comment/get' , GetComment);
+router.post('/anime/:filmname/comment/add', authenticateToken , addCommentFilm)
 
 export default router;

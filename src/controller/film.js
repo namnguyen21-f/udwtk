@@ -8,21 +8,57 @@ export function addCommentFilm(req,res){
         title: req.body.title,
         handle : req.user.email,
         type : req.body.type,
-        to : req.body.to,
+        to : req.params.filmname,
         createdAt : new Date().toISOString(),
     })
     newCommnent.save(function(err) {
         if (!err){
-            film.findOne({name: req.body.to},(err,doc) => {
-                doc.comment = doc.comment.add(newCommnent._id);
+            film.findOne({name: req.params.filmname},(err,doc) => {
                 if (doc){
-                    doc.save(function (err) {
-                        if (err) return handleError(err);
-                    });
+                    if (doc.comment.length == 0){
+                        doc.comment = [newCommnent._id];
+                    }else{
+                        doc.comment = doc.comment.push(newCommnent._id);
+                    }
+                    doc.save().then(() =>{
+                        return res.status(200).json({
+                            success: true,
+                        });
+                    })
                 }
-            })
+            }).catch((error) => {
+                console.log(error);
+                res.status(500).json({
+                success: false,
+                message: 'Server error. Please try again.',
+                error: error.message,
+              });
+            });
         }
+        
     })
+}
+
+export function GetCommentFilm(req,res){
+    film.findOne({name: req.params.filmname}).populate('comment').exec((err, film) =>{
+        if (film){
+            return res.status(200).json({
+                success: true,
+                comment: film.comment,
+            });
+        }else{
+            return res.status(400).json({
+                success: false,
+            });
+        }
+    }).catch((error) => {
+        console.log(error);
+        res.status(500).json({
+        success: false,
+        message: 'Server error. Please try again.',
+        error: error.message,
+      });
+    });
 }
 
 export function NewFilm (req,res) {

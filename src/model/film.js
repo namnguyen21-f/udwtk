@@ -72,7 +72,7 @@ const filmSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
-    comment: [{type: Schema.Types.ObjectId, ref: 'comment'}],
-  },{timestamps});
+    comment: [{type: mongoose.Schema.Types.ObjectId, ref: 'comment'}],
+  }, {timestamps: true});
 
 export default mongoose.model('film', filmSchema);
