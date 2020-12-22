@@ -1,6 +1,8 @@
 import mongoose from 'mongoose'
 import film from '../model/film.js';
 import comment from '../model/comment.js';
+import user from '../model/user.js';
+import {timeDifference} from '../ulti/timediff.js'
 
 export function addCommentFilm(req,res){
     const newCommnent = new comment ({
@@ -18,7 +20,7 @@ export function addCommentFilm(req,res){
                     if (doc.comment.length == 0){
                         doc.comment = [newCommnent._id];
                     }else{
-                        doc.comment = doc.comment.push(newCommnent._id);
+                        doc.comment.push(newCommnent._id)
                     }
                     doc.save().then(() =>{
                         return res.status(200).json({
@@ -40,25 +42,19 @@ export function addCommentFilm(req,res){
 }
 
 export function GetCommentFilm(req,res){
-    film.findOne({name: req.params.filmname}).populate('comment').exec((err, film) =>{
-        if (film){
-            return res.status(200).json({
-                success: true,
-                comment: film.comment,
-            });
-        }else{
+    film.findOne({name: req.params.filmname}).populate('comment').exec((err, doc) =>{
+        if (err){
             return res.status(400).json({
                 success: false,
             });
         }
-    }).catch((error) => {
-        console.log(error);
-        res.status(500).json({
-        success: false,
-        message: 'Server error. Please try again.',
-        error: error.message,
-      });
-    });
+        if (doc){
+            return res.status(200).json({
+                success: true,
+                comment: doc.comment,
+            });
+        }
+    })
 }
 
 export function NewFilm (req,res) {
@@ -147,17 +143,38 @@ export function UpdateFilm (req,res) {
 }
 
 
-export function GetOneFilm(req,res){
-    film.findOne({name: req.params.filmname},(err,data) =>{
-        if (data){
-            return res.status(200).json({
-                success: true,
-                data : data,
+export async function GetOneFilm(req,res){
+    async function handleComment(comment){
+        const rs = [];
+        for (let i=0;i< comment.length; i++){
+            var obj = {};
+            let time = timeDifference(new Date().getTime() , comment[i].updatedAt.getTime());
+            await user.findOne({email : comment[i].handle}).then(doc =>{
+                if (doc){
+                    obj.username = doc.username;
+                    obj.time = time;
+                }
             })
-        }else{
+            obj.title = comment[i].title;
+            rs.push(obj);
+        }
+        return rs;
+    }   
+    film.findOne({name: req.params.filmname}).populate('comment').exec((err, doc) =>{
+        if (err){
             return res.status(400).json({
                 success: false,
-            })
+            });
+        }
+        if (doc){
+            handleComment(doc.comment).then(rs =>{
+                var data = doc.toObject();
+                data.comment = rs;
+                return res.status(200).json({
+                    success: true,
+                    data: data,
+                });
+            });
         }
     })
 }

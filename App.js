@@ -107,7 +107,7 @@ app.get('/anime/:animeName/watching', function(req, res) {
 });
 
 app.get('/anime/:animeName',function(req,res){
-  fetch(`https://gruop08app.herokuapp.com/api/anime/${req.params.animeName}`)
+  fetch(`http://localhost:3000/api/anime/${req.params.animeName}`)
   .then(response => response.json())
   .then(data => {
     res.render('pages/animedetail', {animeData : data.data});

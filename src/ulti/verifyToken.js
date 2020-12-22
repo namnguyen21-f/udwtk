@@ -13,6 +13,7 @@ export function authenticateToken(req, res, next) {
         success: false,
         message: 'Token is not available',
         });
+      console.log(user);
       req.user = user;
       next(); // pass the execution off to whatever request the client intended
     })

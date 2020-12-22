@@ -79,46 +79,21 @@
             <div class="row">
                 <div class="col-lg-8 col-md-8">
                     <div class="review">
-                        <h5 style="margin-bottom: 20px;">REVIEWS</h5>
+                        <h5 style="margin-bottom: 20px;">REVIEWS</h5>  
                         <div>
-                            <img src="https://res.cloudinary.com/dk5lunsyj/image/upload/v1606723081/personal-user-illustration-_2x_sfrrum.png" alt="Image">
-                            <div>
-                                <h6>Chris Curry- <span>1 Hour ago</span></h6>
-                                <p>whachikan Just noticed that someone categorized this as belonging to the genre "demons" LOL</p>
-                            </div>
-                        </div>
-                        <div>
-                            <img src="https://res.cloudinary.com/dk5lunsyj/image/upload/v1606723081/personal-user-illustration-_2x_sfrrum.png" alt="Image">
-                            <div>
-                                <h6>Lewis Mann- <span>5 Hour ago</span></h6>
-                                <p>Finally it came out ages ago</p>
-                            </div>
-                            <img src="https://res.cloudinary.com/dk5lunsyj/image/upload/v1606723081/personal-user-illustration-_2x_sfrrum.png" alt="Image">
-                            <div>
-                                <h6>Louis Tyler- <span>20 Hour ago</span></h6>
-                                <p>Where is the episode 15 ? Slow update! Tch</p>
-                            </div>
-                            <img src="https://res.cloudinary.com/dk5lunsyj/image/upload/v1606723081/personal-user-illustration-_2x_sfrrum.png" alt="Image">
-                            <div>
-                                <h6>Chris Curry- <span>1 Hour ago</span></h6>
-                                <p>whachikan Just noticed that someone categorized this as belonging to the genre "demons" LOL</p>
-                            </div>
-                            <img src="https://res.cloudinary.com/dk5lunsyj/image/upload/v1606723081/personal-user-illustration-_2x_sfrrum.png" alt="Image">
-                            <div>
-                                <h6>Lewis Mann- <span>5 Hour ago</span></h6>
-                                <p>Finally it came out ages ago</p>
-                            </div>
-                            <img src="https://res.cloudinary.com/dk5lunsyj/image/upload/v1606723081/personal-user-illustration-_2x_sfrrum.png" alt="Image">
-                            <div>
-                                <h6>Louis Tyler- <span>20 Hour ago</span></h6>
-                                <p>Where is the episode 15 ? Slow update! Tch</p>
-                            </div>
+                            <% animeData.comment.forEach(function(item,index) { %>
+                                <img src="https://res.cloudinary.com/dk5lunsyj/image/upload/v1606723081/personal-user-illustration-_2x_sfrrum.png" alt="Image">
+                                <div>
+                                    <h6><%= item.username %> --  <span><%= item.time %></span></h6>
+                                    <p><%= item.title %></p>
+                                </div>
+                            <% }) %>  
                         </div>
                     </div>
                     <div class="comment" style="margin-top: 80px;">
                         <h5>YOUR COMMENT</h5>
-                        <textarea placeholder="Your Comment"></textarea>
-                        <button><i class="fa fa-location-arrow"></i> REVIEW</button>
+                        <textarea id="userComment" placeholder="Your Comment"></textarea>
+                        <button id="submitComment"><i class="fa fa-location-arrow"></i>SUBMIT</button>
                     </div>
                 </div>
                 <div class="topViews col-lg-4 col-md-4">
@@ -133,5 +108,31 @@
         </div>
     </div>
     <%- include('../partials/footer.ejs') %>
+    <script>
+        const form = document.getElementById("register");
+        document.getElementById("submitComment").addEventListener('click', () =>{
+            $.ajax({
+                url: '/api/anime/' + window.location.href.split("/")[window.location.href.split("/").length - 1] + "/comment/add",
+                headers :{
+                    'Authorization' : window.localStorage.getItem("authorization"),
+                },
+                data: JSON.stringify({title: document.getElementById('userComment').value,  
+                type: "film"}),
+                processData: false,
+                type: 'POST',
+                contentType: 'application/json',
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function(err) {
+                    if (err.responseJSON.message == "Token is not available"){
+                        alert("You have to login to use this feature")
+                    }
+                }
+
+            });
+        })
+    </script>
 </body>
+
 </html>
