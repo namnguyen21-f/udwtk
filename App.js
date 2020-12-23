@@ -89,6 +89,8 @@ app.get('/signup', function(req, res) {
   });
 });
 
+
+
 app.get('/blog', function(req, res) {
   res.render('pages/blog', {
 
@@ -117,6 +119,13 @@ app.get('/anime/:animeName',function(req,res){
   });
   
 })
+
+app.get('/upload/anime', function(req, res) {
+  res.render('pages/addnewfilm', {
+
+  });
+});
+
 
 
 app.listen(3000, (request, respond) => {

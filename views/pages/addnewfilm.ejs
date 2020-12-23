@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime</title>
+    <%- include('../partials/head.ejs') %>
+    <link href="/css/upload-layout-style.css" type="text/css" rel="stylesheet" >
+</head>
+<body>
+    <%- include('../partials/header.ejs') %>
+    <section class="body">
+        <div class="container">
+          <h1 class="label-big text-center">Upload Film</h1>
+          <div class="info">
+            <form>
+              <hr class="hr">
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label class="label-form-group">Name</label>
+                    <input type="text" class="form-control form-control-name" placeholder="Name film">
+                  </div>
+                  <div class="form-group">
+                    <label class="label-form-group">ID film</label>
+                    <input type="text" class="form-control form-control-id" placeholder="ID">
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <label class="label-form-group">Description</label>
+                    <input type="text" class="form-control form-control-description" placeholder="About this...">
+                  </div>
+                </div>
+              </div>
+              <hr class="hr">
+              <div class="row">
+                <div class="form-group col-lg-6 col-sm-12">
+                    <label class="label-form-group">Studio</label>
+                    <input type="text" class="form-control form-control-studio" placeholder="Studio name">
+                  </div>
+                  <div class="form-group col-12">
+                    <label class="label-form-group">Category</label>
+                    <div class="wrapper">
+                      <div class="list-got-category" id="lgctgry"></div>
+                      <input class="form-control lgctgry" placeholder="Category film">
+                    </div>
+                    <div class="list-select-category" id="lsctgry"></div>
+                  </div>
+              </div>   
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label class="label-form-group">Time release</label>
+                    <input type="datetime-local" class="form-control form-control-timeRelease">
+                  </div>
+                  <div class="form-group">
+                    <label class="label-form-group">Status</label>
+                    <input type="text" class="form-control form-control-status" placeholder="Status">
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <label class="label-form-group">Global rating</label>
+                    <input type="number" step="0.1" min="1" max="10" class="form-control form-control-globalRating" placeholder="Rating">
+                  </div>
+                  <div class="form-group">
+                    <label class="label-form-group">Quality</label>
+                    <input type="text" list="list-quality" class="form-control form-control-quality" placeholder="ID">
+                    <datalist id="list-quality">
+                      <option value="Excellent"></option>
+                      <option value="Good"></option>
+                      <option value="Bad"></option>
+                      <option value="Poor"></option>
+                    </datalist>
+                  </div>
+                </div>
+              </div>
+              <hr class="hr">
+              <div class="row">
+                <div class="col text-center">
+                  <div class="form-group">
+                    <label class="label-form-group">Image</label>
+                    <input type="file" class="form-control-file form-control-image" accept="image/*">
+                  </div>
+                </div>
+                <div class="col text-center">
+                  <div class="form-group">
+                    <label class="label-form-group">Banner</label>
+                    <input type="file" class="form-control-file form-control-banner" accept="image/*">
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="label-form-group label-form-group-video">Video</label>
+                <input type="file" class="form-control-file form-control-video" accept="video/*">
+              </div>
+              <div class="text-center">
+                <input class="button-submit" type="submit" value="Upload">
+              </div>
+            </form>
+          </div>
+        </div>
+    </section>
+    
+    
+    <%- include('../partials/footer.ejs') %>
+</body>
+<script src="/js/upload.js"></script>
+
+</html>

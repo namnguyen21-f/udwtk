@@ -128,7 +128,7 @@
 </body>
 <script>
     setTimeout(() => {
-        console.log('ffd');
+
         if ('loading' in HTMLImageElement.prototype) {
             const images = document.querySelectorAll("img.lazyload");
             images.forEach(img => {
@@ -136,7 +136,7 @@
             });
             const backimages = document.querySelectorAll("div.lazyload");
             backimages.forEach(img => {
-                console.log(img.dataset.background);
+            
                 img.style.backgroundImage = "url('" + img.dataset.background + "')";
             });
             

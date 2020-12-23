@@ -1,0 +1,104 @@
+.body .container {
+    width: 100%;
+    height: 100%;
+    background-color:#0b0c2a;
+}
+
+.body{
+    background: #0b0c2a;
+}
+
+.hr {
+    width: 70%;
+}
+
+.form-control-name, .form-control-id {
+    width: 80%;
+}
+
+.label-form-group {
+    font-size: 1.5rem;
+}
+
+.lgctgry{
+    padding: 22px 8px;
+}
+
+input:not([type='datetime-local']){
+    display: block;
+    padding: 16px 8px !important;
+    font-size: 14px !important;
+}
+
+input[type='datetime-local']{
+    padding: 16px 8px !important;
+    font-size: 14px !important;
+}
+
+.button-category {
+    background-color: #fca311;
+    border-radius: 9px;
+    color: #000000;
+    padding: 0.25rem;
+    margin: 0.2rem;
+    border: none;
+}
+
+.list-select-category {
+    width: 100%;
+    padding: 0.5rem 0rem 0.5rem 0.5rem;
+}
+
+.list-got-category {
+    position: relative;
+}
+
+.wrapper .fa {
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.list-got-category span {
+    background-color:#fca311;
+    padding: 0.2rem 0.85rem 0.2rem 0.5rem;
+    margin-left: 8px;
+    border-radius: 7px;
+}
+
+.list-got-category span .fa {
+    position: absolute;
+    color: #a6a9b6;
+    cursor: pointer;
+    margin-left: 0.1rem;
+}
+
+.wrapper .list-got-category {
+    position: absolute;
+    margin: 0.2rem 0.2rem 0.2rem 0.6rem;
+    padding: 0.25rem 1rem 0rem 0rem;
+}
+
+.form-group .label-form-group-video {
+    width: 100%;
+    text-align: center;
+}
+
+.form-control-video {
+    width: 10%;
+    margin: 0 auto;
+}
+
+.form-control-image, .form-control-banner {
+    width: 20%;
+    margin: 0 auto;
+}
+
+
+.button-submit {
+    background-color: #d0e8f2;
+    padding: 0.75rem 5rem;
+    margin-top: 3rem;
+    margin-bottom: 4rem;
+    border-radius: 11px;
+    border: none;
+}
