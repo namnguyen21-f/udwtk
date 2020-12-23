@@ -36,7 +36,7 @@ app.get('/',async function(req, res) {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({limit: 6,categories : ["Action","Thriller"]}) 
+    body: JSON.stringify({limit: 6,categories : ["Action","Thriller","Horror"]}) 
   })
   .then(response => response.json())
   .then(data => {
@@ -109,7 +109,7 @@ app.get('/anime/:animeName/watching', function(req, res) {
 });
 
 app.get('/anime/:animeName',function(req,res){
-  fetch(`http://localhost:3000/api/anime/${req.params.animeName}`)
+  fetch(`https://gruop08app.herokuapp.com/api/anime/${req.params.animeName}`)
   .then(response => response.json())
   .then(data => {
     res.render('pages/animedetail', {animeData : data.data});
@@ -128,7 +128,7 @@ app.get('/upload/anime', function(req, res) {
 
 
 
-app.listen(3000, (request, respond) => {
+app.listen(process.env.PORT, (request, respond) => {
   console.log(`Our server is live on $. Yay!`);
 });
 
