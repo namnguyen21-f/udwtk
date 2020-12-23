@@ -25,7 +25,7 @@
                 <div class="carousel-inner divImgCenter">
                     <% carousels.forEach(function(item,index) { %>
                         <% if(index == 0){ %>
-                            <div class="carousel-item active" style="background-image: url('<%= item.ImageBanner%>');">
+                            <div class="carousel-item active" data-background=<%= item.ImageBanner%> style="background-image: url('<%= item.ImageBanner%>');">
                                 <div class="textImgCenter">
                                     <h1><%= item.name%></h1>
                                     <h3><%= item.subname%></h3>
@@ -33,7 +33,7 @@
                                 </div>
                             </div>
                             <% } else { %>
-                            <div class="carousel-item" style="background-image: url('<%= item.ImageBanner%>');">
+                            <div class="carousel-item lazyload" data-background=<%= item.ImageBanner%>>
                                 <div class="textImgCenter">
                                     <h1><%= item.name%></h1>
                                     <h3><%= item.subname%></h3>
@@ -41,7 +41,6 @@
                                 </div>
                             </div>
                         <% } %>
-                        
                     <% }) %>   
                     <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon"></span>
@@ -49,13 +48,12 @@
                     <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
                         <span class="carousel-control-next-icon"></span>
                     </a>
+                    
                 </div>
-                
             </section>
-            
             <div class="row">
                 <div class="col-lg-8 trending">
-                    <% items.forEach(function(item) { %>
+                    <% items.forEach(function(item,index) { %>
                         <div class="trending__title">
                             <h4><%= item.title %></h4>
                             <a href="#">View All<i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
@@ -64,7 +62,11 @@
                             <% item.data.forEach(function(ele) { %>
                                 <div class="col-lg-4 col-md-6 col-sm-6 card">
                                     <div class="card__img">
-                                        <img class="card-img-top" src=<%= ele.Image%> alt="image"> 
+                                        <% if (index < 1){ %>
+                                            <img class="card-img-top" src=<%= ele.Image%> alt="image"> 
+                                          <% } else{ %>  
+                                            <img class="card-img-top lazyload" loading="lazy" data-src=<%= ele.Image%> alt="image"> 
+                                         <% } %>
                                         <span><%= ele.Rating%></span>
                                         <span><i class="fa fa-eye" aria-hidden="true"></i><%= ele.Views%></span>
                                     </div>
@@ -122,9 +124,30 @@
             
         </div>
     </div>
-    
     <%- include('../partials/footer.ejs') %>
-    
-
 </body>
+<script>
+    setTimeout(() => {
+        console.log('ffd');
+        if ('loading' in HTMLImageElement.prototype) {
+            const images = document.querySelectorAll("img.lazyload");
+            images.forEach(img => {
+                img.src = img.dataset.src;
+            });
+            const backimages = document.querySelectorAll("div.lazyload");
+            backimages.forEach(img => {
+                console.log(img.dataset.background);
+                img.style.backgroundImage = "url('" + img.dataset.background + "')";
+            });
+            
+            } else {
+                // Dynamically import the LazySizes library
+            let script = document.createElement("script");
+            script.async = true;
+            script.src =
+                "https://cdnjs.cloudflare.com/ajax/libs/lazysizes/4.1.8/lazysizes.min.js";
+            document.body.appendChild(script);
+            }
+        },500)
+  </script>
 </html>

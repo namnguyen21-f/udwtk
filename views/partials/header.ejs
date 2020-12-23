@@ -40,7 +40,10 @@
             <div class="linkMain__feauture">
                 <a type="button" class="linkChild" data-toggle="collapse" href="#search"><i class="fa fa-search" aria-hidden="true"></i></a>
                 <div class="collapse" id="search">
-                    <input type="text">
+                    <div class="d-flex">
+                        <input type="text" name="search" placeholder="Search Film">
+                        <button class="searchbtn"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    </div>
                 </div>
                 <a type="button" class="linkChild" data-toggle="collapse" href="#account"><i class="fa fa-user" aria-hidden="true"></i></a>
                 <div class="collapse" id="account">
@@ -88,6 +91,11 @@
         localStorage.removeItem('authorization');
         window.location.href = "/";
     })
+
+    document.querySelector(".searchbtn").addEventListener('click',() => {
+        window.location.href = "/anime/search/" + document.querySelector('input[name="search"]').value;
+    })
+    
         
    
 </script>

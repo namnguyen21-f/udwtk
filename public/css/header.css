@@ -2,15 +2,14 @@
   font-size: 30px;
 }
 
-
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
-*{
-    box-sizing: border-box;
-    color: #fff;
-    font-size: 16px;
+* {
+  box-sizing: border-box;
+  color: #fff;
+  font-size: 16px;
 }
 
 .linkMain {
@@ -65,18 +64,36 @@ a {
   background-color: transparent;
 }
 
-#search input {
-  padding: 0 8px;
-  border-radius: 24px;
+#search div button i {
+  color: #222;
 }
 
-#search *,
+#search div button {
+  outline: none;
+  border: 0;
+  margin-left: -30px;
+  background: transparent;
+}
+
+#search div input,
+#search div button {
+  display: inline-block;
+}
+
+#search div input,
 #account * {
   color: #333;
   font-size: 16px;
   padding: 3px 0;
   line-height: 20px;
   font-weight: 400;
+}
+
+#search div input {
+  padding: 0px 35px 0 10px;
+  border-radius: 24px;
+  outline: none;
+  border: 0;
 }
 
 .linkMain__feauture a {
@@ -95,23 +112,23 @@ a {
   text-align: center;
 }
 
-.auTrue{
+.auTrue {
   display: none;
   text-align: center;
 }
 
-.auTrue .user_image{
+.auTrue .user_image {
   width: 70px;
   height: auto;
 }
 
-.auTrue #user_name{
+.auTrue #user_name {
   font-weight: 750;
   display: block;
   text-transform: capitalize;
 }
 
-.auTrue .nav{
+.auTrue .nav {
   margin-top: 16px;
-  border-top: 1px solid #333
+  border-top: 1px solid #333;
 }
