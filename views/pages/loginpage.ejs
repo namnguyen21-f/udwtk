@@ -43,8 +43,7 @@
                                     aria-hidden="true"></i>SIGN IN WITH FACEBOOK</a>
                         </div>
                         <div class="row">
-                            <a href="#" class="google text-white"><i class="fa fa-google" aria-hidden="true"></i>SIGN IN
-                                WITH GOOGLE</a>
+                            <a href="#" class="g-signin2 google text-white" data-onsuccess="onSignInGoogle"></a>
                         </div>
                         <div class="row">
                             <a href="#" class="twitter text-white"><i class="fa fa-twitter" aria-hidden="true"></i>SIGN
@@ -76,6 +75,28 @@
           }
         });
       })
+
+      function onSignInGoogle(googleUser){
+        var profile = googleUser.getBasicProfile();
+        $.ajax({
+          url: '/api/signup',
+          data: JSON.stringify({email : document.getElementById('email').value,  
+          password : document.getElementById('password').value,
+          passwordConfirm : document.getElementById('passwordConfirm').value,
+          username : document.getElementById('username').value}),
+          processData: false,
+          type: 'POST',
+          contentType: 'application/json',
+          success: function (data) {
+            localStorage.setItem('authorization','Bearer ' + data.token);
+            window.location.href = "/";
+          }
+        });
+        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+        console.log('Name: ' + profile.getName());
+        console.log('Image URL: ' + profile.getImageUrl());
+        console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+      }
     </script>
   </body>
 </html>

@@ -47,7 +47,6 @@ export function Login (req,res) {
     
 }   
 
-
 export function GetUser (req,res) {
     const data = req.body;
     user.findOne({email: req.user.email},(err, user) => {}).then(user =>{
@@ -73,7 +72,6 @@ export function GetUser (req,res) {
         error: error.message,
       });
     });
-    
 }
 
 export function Signup (req,res) {
@@ -104,7 +102,42 @@ export function Signup (req,res) {
           });
         });
     });
+}
 
+export function CreateAccount (req,res) {
+    user.findOne({email: req.user.email},(err, user) => {}).then(user =>{
+        if (!user) {
+            const newUser = new user({
+                _id: mongoose.Types.ObjectId(),
+                username: req.body.username,
+                password: "N/A",
+                passwordConfirm: "N/A",
+                email: req.body.email,
+                role: "user/google",
+                createdAt: new Date(),
+            })
+            return newUser.save().then((data) =>{
+                const token = generateAccessToken(req.body.email);
+                return res.status(200).json({
+                    success: true,
+                    message: 'Register Successful',
+                    token : token,
+                })
+            })
+        }else{
+            return res.status(200).json({
+                success: false,
+                message: "Email has been used"
+            }); 
+        }
+    })
+    .catch((error) => {
+        return res.status(500).json({
+        success: false,
+        message: 'Server error. Please try again.',
+        error: error.message,
+      });
+    });
 }
 
 export function ChangePassword (req,res) {

@@ -1,5 +1,5 @@
 import express from 'express';
-import {Login,Signup,ChangePassword,GetUser} from '../controller/user.js'
+import {Login,Signup,ChangePassword,GetUser,CreateAccount} from '../controller/user.js'
 import {CreateComment,GetComment} from '../controller/comment.js'
 import {UpdateFilm,NewFilm,GetAllFilmCategories,GetFilmByRank,GetOneFilm ,addCommentFilm,GetCommentFilm} from '../controller/film.js'
 import {UploadImage,GetImage,} from '../controller/image.js'
@@ -25,6 +25,7 @@ router.post('/login',Login);
 router.post('/getuser', authenticateToken , GetUser);
 router.post('/changepassword', authenticateToken , ChangePassword);
 router.post('/signup', userValidatior ,Signup);
+router.post('/createaccount', CreateAccount); //Account for user loggined by Google
 router.post('/uploadimage', authenticateToken , upload.single('image'), UploadImage);
 router.post('/getimage', GetImage);
 
