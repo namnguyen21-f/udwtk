@@ -10,7 +10,7 @@ export function UploadImage (req,res,next) {
     if (req.body.setwidth != null && req.body.setheight != null){
         resizeimage(__dirname + "/uploads/" + req.file.filename, 'jpg', req.body.setimagewidth , req.body.setimageheight);
     }
-    cloudinary.v2.uploader.upload(__dirname + "/uploads/" + req.file.filename, (err,result)=>{
+    cloudinary.v2.uploader.upload(__dirname + "/uploads/" + req.file.filename, {quality : 40} ,(err,result)=>{
         if (result) {
             const imageUpload = new image({
                 _id: mongoose.Types.ObjectId(),

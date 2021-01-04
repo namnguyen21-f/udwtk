@@ -1,7 +1,8 @@
 import express from 'express';
 import {Login,Signup,ChangePassword,GetUser,CreateAccount} from '../controller/user.js'
 import {CreateComment,GetComment} from '../controller/comment.js'
-import {UpdateFilm,NewFilm,GetAllFilmCategories,GetFilmByRank,GetOneFilm ,addCommentFilm,GetCommentFilm} from '../controller/film.js'
+import {UpdateFilm,NewFilm,GetAllFilmCategories,GetFilmByRank,GetOneFilm ,
+  addCommentFilm,GetCommentFilm,upLikeFilm,downLikeFilm,GetFilmBySearch} from '../controller/film.js'
 import {UploadImage,GetImage,} from '../controller/image.js'
 import {userValidatior} from '../ulti/userValidatior.js'
 import {authenticateToken} from '../ulti/verifyToken.js'
@@ -33,12 +34,17 @@ router.post('/getimage', GetImage);
 router.post('/newfilm', authenticateToken , upload.single('image'), UploadImage, NewFilm);
 router.post('/getallfilm' , GetAllFilmCategories);
 router.post('/gettopview' , GetFilmByRank);
+router.post('/search', GetFilmBySearch);
 //
 router.post('/comment/create' , CreateComment);
 router.post('/comment/get' , GetComment);
 //
 router.get('/anime/:filmname', GetOneFilm);
 router.post('/anime/:filmname/comment/add', authenticateToken , addCommentFilm)
-router.get('/anime/:filmname/comment', GetCommentFilm)
+router.get('/anime/:filmname/comment', GetCommentFilm);
+
+//
+router.post('/anime/:filmname/like',authenticateToken , upLikeFilm);
+router.get('/anime/:filmname/unlike', authenticateToken , downLikeFilm);
 
 export default router;

@@ -1,8 +1,9 @@
 import mongoose from 'mongoose'
-import film from '../model/film.js';
 import comment from '../model/comment.js';
 import user from '../model/user.js';
 import {timeDifference} from '../ulti/timediff.js'
+import like from '../model/like.js';
+import film from '../model/film.js';
 
 export function addCommentFilm(req,res){
     const newCommnent = new comment ({
@@ -41,6 +42,64 @@ export function addCommentFilm(req,res){
     })
 }
 
+export function upLikeFilm(req,res){
+    const newLike = new like ({
+        _id: mongoose.Types.ObjectId(),
+        handle : req.user.email,
+        to : req.params.filmname,
+        createdAt : new Date().toISOString(),
+    })
+    newLike.save(function(err) {
+        if (!err){
+            film.findOne({name: req.params.filmname},(err,doc) => {
+                if (doc){
+                    if (doc.like.length == 0){
+                        doc.like = [newLike._id];
+                    }else{
+                        doc.like.push(newLike._id)
+                    }
+                    doc.save().then(() =>{
+                        return res.status(200).json({
+                            success: true,
+                        });
+                    })
+                }
+            }).catch((error) => {
+                console.log(error);
+                res.status(500).json({
+                success: false,
+                message: 'Server error. Please try again.',
+                error: error.message,
+              });
+            });
+        }
+        
+    })
+}
+
+export function downLikeFilm(req,res){
+    like.findOneAndRemove({handle : req.user.email} , (err,doc) =>{
+        if (!err){
+            film.updateOne(
+                { name : req.params.filmname},
+                { "$pull": { "like": doc._id } },
+                function (err, doc){
+                    return res.status(200).json({
+                        success: true,
+                    });
+                }
+            );
+        }
+    }).catch((error) => {
+        console.log(error);
+        res.status(500).json({
+        success: false,
+        message: 'Server error. Please try again.',
+        error: error.message,
+      });
+    });
+}
+
 export function GetCommentFilm(req,res){
     film.findOne({name: req.params.filmname}).populate('comment').exec((err, doc) =>{
         if (err){
@@ -54,7 +113,14 @@ export function GetCommentFilm(req,res){
                 comment: doc.comment,
             });
         }
-    })
+    }).catch((error) => {
+        console.log(error);
+        res.status(500).json({
+        success: false,
+        message: 'Server error. Please try again.',
+        error: error.message,
+      });
+    });
 }
 
 export function NewFilm (req,res) {
@@ -209,6 +275,30 @@ export function GetAllFilmCategories(req,res){
         }
     }
     qu();
+}
+
+export function GetFilmBySearch(req,res){
+    var re = new RegExp(req.body.search,"g");
+    film.find({ name: re}).limit(req.body.limit).exec().then(docs => {
+        if (docs) {
+            return res.status(200).json({
+                success: true,
+                data : docs,
+            })
+        }else{
+            return res.status(400).json({
+                success: true,
+                message: "Not found any result"
+            })
+        }
+    }).catch((error) => {
+        console.log(error);
+        res.status(500).json({
+        success: false,
+        message: 'Server error. Please try again.',
+        error: error.message,
+      });
+    });;
 
 }
 

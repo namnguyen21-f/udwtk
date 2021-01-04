@@ -1,12 +1,13 @@
 import mongoose from 'mongoose'
 import comment from './comment.js'
-
+import like from './like.js'
 const filmSchema = new mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     name: {
       type: String,
       required: true,
-      trim: true
+      trim: true,
+      set: v => v.toLowerCase()
     },
     subname: {
         type: String,
@@ -50,7 +51,7 @@ const filmSchema = new mongoose.Schema({
         trim: true
     },
     Views: {
-        type: String,
+        type: Number,
         trim: true
     },
     Image: {
@@ -73,6 +74,7 @@ const filmSchema = new mongoose.Schema({
         default: Date.now,
     },
     comment: [{type: mongoose.Schema.Types.ObjectId, ref: 'comment'}],
+    like: [{type: mongoose.Schema.Types.ObjectId, ref: 'like'}],
   }, {timestamps: true});
 
 export default mongoose.model('film', filmSchema);

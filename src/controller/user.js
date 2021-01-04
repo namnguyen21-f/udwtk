@@ -20,12 +20,16 @@ export function Login (req,res) {
         }else{
             bcrypt.compare(data.password,user.password,function(err,result){
                 console.log(result);
+                const userReduced = {
+                    username: user.username,
+                    email: user.email,
+                };
                 if (result == true){
                     const token = generateAccessToken(user.email);
                     return res.status(200).json({
                         success: true,
                         message: 'Login Successful',
-                        User: user,
+                        User: userReduced,
                         token : token,
                     });
                 }else{
@@ -126,8 +130,7 @@ export function CreateAccount (req,res) {
             })
         }else{
             return res.status(200).json({
-                success: false,
-                message: "Email has been used"
+                success: true,
             }); 
         }
     })

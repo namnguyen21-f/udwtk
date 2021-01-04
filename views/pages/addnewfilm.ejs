@@ -96,7 +96,7 @@
                 <input type="file" class="form-control-file form-control-video" accept="video/*">
               </div>
               <div class="text-center">
-                <input class="button-submit" type="submit" value="Upload">
+                <input class="button-submit" id="submit" type="submit" value="Upload">
               </div>
             </form>
           </div>
@@ -107,5 +107,23 @@
     <%- include('../partials/footer.ejs') %>
 </body>
 <script src="/js/upload.js"></script>
+<script>
+    document.getElementById("submit").addEventListener('click', () =>{
+      $.ajax({
+          url: '/api/newfilm',
+          data: JSON.stringify({email : document.getElementById('email').value,  
+          password : document.getElementById('password').value,
+          passwordConfirm : document.getElementById('passwordConfirm').value,
+          username : document.getElementById('username').value}),
+          processData: false,
+          type: 'POST',
+          contentType: 'application/json',
+          success: function (data) {
+            localStorage.setItem('authorization','Bearer ' + data.token);
+            window.location.href = "/";
+          }
+        });
+    })
+</script>
 
 </html>
