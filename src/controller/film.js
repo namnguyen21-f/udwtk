@@ -51,7 +51,7 @@ export function upLikeFilm(req,res){
     })
     newLike.save(function(err) {
         if (!err){
-            film.findOne({name: req.params.filmname},(err,doc) => {
+            film.findOne({name: req.params.filmname}, function(err, doc) {
                 if (doc){
                     if (doc.like.length == 0){
                         doc.like = [newLike._id];
@@ -63,6 +63,10 @@ export function upLikeFilm(req,res){
                             success: true,
                         });
                     })
+                }else{
+                    return res.status(400).json({
+                        success: false,
+                    });
                 }
             }).catch((error) => {
                 console.log(error);
@@ -86,7 +90,7 @@ export function downLikeFilm(req,res){
                 function (err, doc){
                     return res.status(200).json({
                         success: true,
-                    });
+                    }); 
                 }
             );
         }
@@ -135,6 +139,7 @@ export function NewFilm (req,res) {
             const newfilm = new film({
                 _id: mongoose.Types.ObjectId(),
                 name: req.body.name,
+                lowername: req.body.name,
                 subname: req.body.subname,
                 type : req.body.type,
                 Studios : req.body.studios,
