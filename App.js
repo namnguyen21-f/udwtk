@@ -13,10 +13,13 @@ const __dirname = dirname(__filename);
 var url = "https://gruop08app.herokuapp.com/";
 const app = express();
 
+const stringEB = "http://localhost:3000";
+//https://gruop08app.herokuapp.com
+
 mongoose.Promise = global.Promise;
 const db = mongoose.connection;
 
-
+//app.use(cors())
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -31,7 +34,7 @@ app.get('/',async function(req, res) {
   var carousels = [];
   var items = [];
   var topviews  = [];
-  await fetch(`https://gruop08app.herokuapp.com/api/getallfilm`,{
+  await fetch(stringEB + `/api/getallfilm`,{
     method: 'POST', 
     headers: {
       'Content-Type': 'application/json'
@@ -49,7 +52,7 @@ app.get('/',async function(req, res) {
   const topviewquery = ['Day','Month','Year'];
 
   for (let i=0;i <topviewquery.length; i++){
-    await fetch('https://gruop08app.herokuapp.com/api/gettopview',{
+    await fetch(stringEB + '/api/gettopview',{
       method: 'POST', 
       headers: {
         'Content-Type': 'application/json'
@@ -98,7 +101,7 @@ app.get('/blog', function(req, res) {
 });
 
 app.get('/anime/:animeName/watching', function(req, res) {
-  fetch(`https://gruop08app.herokuapp.com/api/anime/${req.params.animeName}`)
+  fetch(stringEB + `/api/anime/${req.params.animeName}`)
   .then(response => response.json())
   .then(data => {
     res.render('pages/animewatching', {animeData : data.data});
@@ -109,7 +112,7 @@ app.get('/anime/:animeName/watching', function(req, res) {
 });
 
 app.get('/anime/:animeName',function(req,res){
-  fetch(`https://gruop08app.herokuapp.com/api/anime/${req.params.animeName}`)
+  fetch(stringEB +`/api/anime/${req.params.animeName}`)
   .then(response => response.json())
   .then(data => {
     res.render('pages/animedetail', {animeData : data.data});

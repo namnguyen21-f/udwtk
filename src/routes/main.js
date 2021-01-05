@@ -3,6 +3,7 @@ import {Login,Signup,ChangePassword,GetUser,CreateAccount} from '../controller/u
 import {CreateComment,GetComment} from '../controller/comment.js'
 import {UpdateFilm,NewFilm,GetAllFilmCategories,GetFilmByRank,GetOneFilm ,
   addCommentFilm,GetCommentFilm,upLikeFilm,downLikeFilm,GetFilmBySearch} from '../controller/film.js'
+import {GetUserLike} from '../controller/like.js'
 import {UploadImage,GetImage,} from '../controller/image.js'
 import {userValidatior} from '../ulti/userValidatior.js'
 import {authenticateToken} from '../ulti/verifyToken.js'
@@ -36,6 +37,8 @@ router.post('/getallfilm' , GetAllFilmCategories);
 router.post('/gettopview' , GetFilmByRank);
 router.post('/search', GetFilmBySearch);
 //
+router.post('/user/getlike', authenticateToken , GetUserLike) //Lay user like roi luu vo cookie nha ong
+//
 router.post('/comment/create' , CreateComment);
 router.post('/comment/get' , GetComment);
 //
@@ -44,7 +47,7 @@ router.post('/anime/:filmname/comment/add', authenticateToken , addCommentFilm)
 router.get('/anime/:filmname/comment', GetCommentFilm);
 
 //
-router.post('/anime/:filmname/like',authenticateToken , upLikeFilm);
-router.get('/anime/:filmname/unlike', authenticateToken , downLikeFilm);
+router.post('/anime/:filmname/like',authenticateToken , upLikeFilm); //call api to like fim
+router.get('/anime/:filmname/unlike', authenticateToken , downLikeFilm); //call api to unlike film
 
 export default router;

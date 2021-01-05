@@ -7,7 +7,12 @@ const filmSchema = new mongoose.Schema({
       type: String,
       required: true,
       trim: true,
-      set: v => v.toLowerCase()
+    },
+    lowername: {
+        type: String,
+        required: true,
+        trim: true,
+        set: v => v.toLowerCase(),
     },
     subname: {
         type: String,
