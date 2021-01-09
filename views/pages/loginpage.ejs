@@ -61,7 +61,6 @@
       form.addEventListener('submit',(e)=>{
         e.preventDefault();
         const data = {};
-      
         $.ajax({
           url: '/api/login',
           data: JSON.stringify({email : document.getElementById('email').value,  
@@ -79,11 +78,9 @@
       function onSignInGoogle(googleUser){
         var profile = googleUser.getBasicProfile();
         $.ajax({
-          url: '/api/signup',
-          data: JSON.stringify({email : document.getElementById('email').value,  
-          password : document.getElementById('password').value,
-          passwordConfirm : document.getElementById('passwordConfirm').value,
-          username : document.getElementById('username').value}),
+          url: '/api/createaccount',
+          data: JSON.stringify({email : profile.getEmail(),  
+          username : profile.getName()}),
           processData: false,
           type: 'POST',
           contentType: 'application/json',
