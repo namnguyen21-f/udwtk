@@ -1,5 +1,6 @@
 <script>
     if (localStorage.getItem("authorization") != null){
+        
         $.ajax({
           url: '/api/getuser',
           processData: false,
@@ -13,6 +14,8 @@
             document.querySelector(".auTrue").style.display = 'block';   
             document.querySelector(".auFalse").style.display = 'none'; 
         }
+
+
     });
     } 
 </script>

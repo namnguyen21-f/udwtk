@@ -66,7 +66,7 @@
                         
                     </div>
                     <div class="chooseButton">
-                        <button style="border-radius: 5%;"><i class="fa fa-heart"></i>&nbsp;FOLLOW</button>
+                        <button style="border-radius: 5%;" onclick="followClicked()"><i class="fa fa-heart"></i>&nbsp;FOLLOW</button>
                         <a href="/anime/<%= animeData.name %>/watching" style="border-radius: 5% 0 0 5%; margin-left: 10px;">WATCH NOW</a>
                         <button style="border-radius: 0 5% 5% 0;"><i class="fa fa-angle-right"></i></button>
         
@@ -132,6 +132,12 @@
 
             });
         })
+
+        function followClicked() {
+            if (localStorage.getItem("authorization") == null) {
+                window.location.href = '/login'
+            }
+        };
     </script>
 </body>
 
