@@ -110,7 +110,7 @@ export function Signup (req,res) {
 }
 
 export function CreateAccount (req,res) {
-    user.findOne({email: req.user.email},(err, user) => {}).then(user =>{
+    user.findOne({email: req.body.email},(err, user) => {}).then(user =>{
         if (!user) {
             const newUser = new user({
                 _id: mongoose.Types.ObjectId(),
@@ -130,8 +130,10 @@ export function CreateAccount (req,res) {
                 })
             })
         }else{
+            const token = generateAccessToken(req.body.email);
             return res.status(200).json({
                 success: true,
+                token : token,
             }); 
         }
     })
