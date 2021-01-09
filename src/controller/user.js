@@ -130,8 +130,10 @@ export function CreateAccount (req,res) {
                 })
             })
         }else{
+            const token = generateAccessToken(req.body.email);
             return res.status(200).json({
                 success: true,
+                token : token,
             }); 
         }
     })
