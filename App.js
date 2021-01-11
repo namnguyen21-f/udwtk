@@ -13,7 +13,7 @@ const __dirname = dirname(__filename);
 var url = "https://gruop08app.herokuapp.com";
 const app = express();
 
-const stringEB = "http://localhost:3000";
+const stringEB = "https://gruop08app.herokuapp.com";
 //https://gruop08app.herokuapp.com
 
 mongoose.Promise = global.Promise;
