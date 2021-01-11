@@ -1,6 +1,8 @@
 import mongoose from 'mongoose'
 import comment from './comment.js'
 import like from './like.js'
+import espisode from './ep.js'
+
 const filmSchema = new mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     name: {
@@ -78,8 +80,13 @@ const filmSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
+    ep: [{type: mongoose.Schema.Types.ObjectId, ref: 'espisode'}],
     comment: [{type: mongoose.Schema.Types.ObjectId, ref: 'comment'}],
     like: [{type: mongoose.Schema.Types.ObjectId, ref: 'like'}],
+    
   }, {timestamps: true});
 
+  
+
 export default mongoose.model('film', filmSchema);
+

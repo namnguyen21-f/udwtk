@@ -4,6 +4,7 @@ import path, {dirname} from 'path';
 import image from '../model/image.js';
 import cloudinary from '../ulti/cloudinary.js'
 import resizeimage from '../ulti/resizeimage.js'
+import { runInNewContext } from 'vm';
 const __dirname = path.resolve();
 
 export async function UploadImage (req,res,next) {
@@ -50,6 +51,37 @@ export async function UploadImage (req,res,next) {
             })
         }
     
+    })
+
+    
+}
+
+export async function UploadVideo (req,res,next) {
+    cloudinary.v2.uploader.upload(__dirname + "/uploads/" + req.file.filename, {resource_type: "video"},(err,result)=>{
+        if (result) {
+            const imageUpload = new image({
+                _id: mongoose.Types.ObjectId(),
+                name: req.file.filename,
+                url: result.url,
+                handle: req.user.email,
+                createdAt : new Date().toISOString(),
+            });
+            return imageUpload.save().then((data) => {
+                if (data) {
+                    console.log(result.url);
+                    req.body.videoUrl = result.url;
+                    next();
+                }else{
+                    return res.status(400).json({
+                        message: 'Upload Video Failed',
+                    })
+                }
+            })
+        }else{
+            return res.status(400).json({
+                message: err,
+            })
+        }
     })
 
     

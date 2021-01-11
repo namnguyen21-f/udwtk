@@ -2,9 +2,9 @@ import express from 'express';
 import {Login,Signup,ChangePassword,GetUser,CreateAccount} from '../controller/user.js'
 import {CreateComment,GetComment} from '../controller/comment.js'
 import {UpdateFilm,NewFilm,GetAllFilmCategories,GetFilmByRank,GetOneFilm ,
-  addCommentFilm,GetCommentFilm,upLikeFilm,downLikeFilm,GetFilmBySearch} from '../controller/film.js'
+  addCommentFilm,GetCommentFilm,upLikeFilm,downLikeFilm,GetFilmBySearch,UploadSpecificVideo} from '../controller/film.js'
 import {GetUserLike} from '../controller/like.js'
-import {UploadImage,GetImage,} from '../controller/image.js'
+import {UploadImage,GetImage, UploadVideo,} from '../controller/image.js'
 import {userValidatior} from '../ulti/userValidatior.js'
 import {authenticateToken} from '../ulti/verifyToken.js'
 
@@ -14,7 +14,7 @@ var storage = multer.diskStorage({
       cb(null, './uploads/')
     },
     filename: function (req, file, cb) {
-      cb(null, file.fieldname + '-' + Date.now() + file.originalname)
+      cb(null, file.fieldname + '-' + Date.now() + "." + file.originalname.split(".")[file.originalname.split(".").length - 1]);
     }
   })
   
@@ -29,10 +29,12 @@ router.post('/changepassword', authenticateToken , ChangePassword);
 router.post('/signup', userValidatior ,Signup);
 router.post('/createaccount', CreateAccount); //Account for user loggined by Google
 router.post('/uploadimage', authenticateToken , upload.single('image'), UploadImage);
-router.post('/getimage', GetImage);
+router.post('/getimage', GetImage);//,
 
 //, , NewFilm
 router.post('/newfilm', authenticateToken, upload.array('image', 2), UploadImage, NewFilm);
+router.post('/upload/:filmname/:ep/video', authenticateToken, upload.single("video"), UploadVideo, UploadSpecificVideo);
+
 router.post('/getallfilm' , GetAllFilmCategories);
 router.post('/gettopview' , GetFilmByRank);
 router.post('/search/anime/:filmname', GetFilmBySearch);

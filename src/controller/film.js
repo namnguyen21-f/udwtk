@@ -4,6 +4,7 @@ import user from '../model/user.js';
 import {timeDifference} from '../ulti/timediff.js'
 import like from '../model/like.js';
 import film from '../model/film.js';
+import espisode from '../model/ep.js';
 
 export function addCommentFilm(req,res){
     const newCommnent = new comment ({
@@ -42,32 +43,28 @@ export function addCommentFilm(req,res){
     })
 }
 
-export function upLikeFilm(req,res){
-    const newLike = new like ({
+export function UploadSpecificVideo(req,res){
+    const newEp = new espisode ({
         _id: mongoose.Types.ObjectId(),
-        handle : req.user.email,
-        to : req.params.filmname,
-        createdAt : new Date().toISOString(),
+        name : req.params.filmname,
+        index : parseInt(req.params.ep),
+        videoUrl: req.body.videoUrl,
     })
-    newLike.find({handle: req.user.email        })
-    newLike.save(function(err) {
+    console.log(req.params);
+    newEp.save(function(err) {
         if (!err){
-            film.findOne({name: req.params.filmname}, function(err, doc) {
+            film.findOne({name: req.params.filmname},(err,doc) => {
                 if (doc){
-                    if (doc.like.length == 0){
-                        doc.like = [newLike._id];
+                    if (doc.ep.length == 0){
+                        doc.ep = [newEp._id];
                     }else{
-                        doc.like.push(newLike._id)
+                        doc.ep.push(newEp._id);
                     }
                     doc.save().then(() =>{
                         return res.status(200).json({
                             success: true,
                         });
                     })
-                }else{
-                    return res.status(400).json({
-                        success: false,
-                    });
                 }
             }).catch((error) => {
                 console.log(error);
@@ -76,6 +73,53 @@ export function upLikeFilm(req,res){
                 message: 'Server error. Please try again.',
                 error: error.message,
               });
+            });
+        }
+        
+    })
+}
+
+export function upLikeFilm(req,res){
+    const newLike = new like ({
+        _id: mongoose.Types.ObjectId(),
+        handle : req.user.email,
+        to : req.params.filmname,
+        createdAt : new Date().toISOString(),
+    })
+    newLike.find({handle: req.user.email,to : req.params.filmname} , (err,doc) =>{
+        if (doc){
+            newLike.save(function(err) {
+                if (!err){
+                    film.findOne({name: req.params.filmname}, function(err, doc) {
+                        if (doc){
+                            if (doc.like.length == 0){
+                                doc.like = [newLike._id];
+                            }else{
+                                doc.like.push(newLike._id)
+                            }
+                            doc.save().then(() =>{
+                                return res.status(200).json({
+                                    success: true,
+                                });
+                            })
+                        }else{
+                            return res.status(400).json({
+                                success: false,
+                            });
+                        }
+                    }).catch((error) => {
+                        console.log(error);
+                        res.status(500).json({
+                        success: false,
+                        message: 'Server error. Please try again.',
+                        error: error.message,
+                      });
+                    });
+                }
+            })
+        }else{
+            return res.status(200).json({
+                success: false,
             });
         }
     })
