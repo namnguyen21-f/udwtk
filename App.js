@@ -10,10 +10,10 @@ import cloudinary from './src/ulti/cloudinary.js'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-var url = "https://gruop08app.herokuapp.com/";
+var url = "https://gruop08app.herokuapp.com";
 const app = express();
 
-const stringEB = "https://gruop08app.herokuapp.com";
+const stringEB = "http://localhost:3000";
 //https://gruop08app.herokuapp.com
 
 mongoose.Promise = global.Promise;
