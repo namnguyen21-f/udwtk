@@ -14,7 +14,7 @@ var storage = multer.diskStorage({
       cb(null, './uploads/')
     },
     filename: function (req, file, cb) {
-      cb(null, file.fieldname + '-' + Date.now() + '.jpg')
+      cb(null, file.fieldname + '-' + Date.now() + file.originalname)
     }
   })
   
@@ -31,15 +31,15 @@ router.post('/createaccount', CreateAccount); //Account for user loggined by Goo
 router.post('/uploadimage', authenticateToken , upload.single('image'), UploadImage);
 router.post('/getimage', GetImage);
 
-
-router.post('/newfilm', authenticateToken , upload.single('image'), UploadImage, NewFilm);
+//, , NewFilm
+router.post('/newfilm', authenticateToken, upload.array('image', 2), UploadImage, NewFilm);
 router.post('/getallfilm' , GetAllFilmCategories);
 router.post('/gettopview' , GetFilmByRank);
-router.post('/search', GetFilmBySearch);
+router.post('/search/anime/:filmname', GetFilmBySearch);
 //
 router.post('/user/getlike', authenticateToken , GetUserLike) //Lay user like roi luu vo cookie nha ong
 //
-router.post('/comment/create' , CreateComment);
+router.post('/comment/create', CreateComment);
 router.post('/comment/get' , GetComment);
 //
 router.get('/anime/:filmname', GetOneFilm);
@@ -48,6 +48,6 @@ router.get('/anime/:filmname/comment', GetCommentFilm);
 
 //
 router.post('/anime/:filmname/like',authenticateToken , upLikeFilm); //call api to like fim
-router.get('/anime/:filmname/unlike', authenticateToken , downLikeFilm); //call api to unlike film
+router.post('/anime/:filmname/unlike', authenticateToken , downLikeFilm); //call api to unlike film
 
 export default router;

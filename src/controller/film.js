@@ -49,6 +49,7 @@ export function upLikeFilm(req,res){
         to : req.params.filmname,
         createdAt : new Date().toISOString(),
     })
+    newLike.find({handle: req.user.email        })
     newLike.save(function(err) {
         if (!err){
             film.findOne({name: req.params.filmname}, function(err, doc) {
@@ -77,7 +78,6 @@ export function upLikeFilm(req,res){
               });
             });
         }
-        
     })
 }
 
@@ -142,20 +142,20 @@ export function NewFilm (req,res) {
                 lowername: req.body.name,
                 subname: req.body.subname,
                 type : req.body.type,
-                Studios : req.body.studios,
-                DateAired : req.body.dateaired,
-                Status : req.body.status,
-                Gerne: req.body.gerne,
-                Scores: req.body.scores,
-                Rating: req.body.rating,
-                Duration: req.body.duaration,
-                Quality: req.body.quality, 
-                Views: req.body.views, 
-                Handle: req.user.username,
-                Rank: req.user.rank,
+                Studios : req.body.studios ? req.body.studios : "N/A",
+                DateAired : req.body.dateaired ? req.body.dateaired : "N/A",
+                Status : req.body.status ? req.body.status : "N/A",
+                Gerne: req.body.gerne ? req.body.gerne : "N/A",
+                Scores: req.body.scores ? req.body.scores : "N/A",
+                Rating: req.body.rating ? req.body.rating : "N/A",
+                Duration: req.body.duaration ? req.body.duaration : "N/A",
+                Quality: req.body.quality ? req.body.quality : "N/A", 
+                Views: req.body.views ? req.body.views : "N/A", 
+                Handle: req.user.email ? req.user.email : "N/A",
+                Rank: req.user.rank ? req.user.rank : "N/A",
                 Image: req.body.imageurl,
                 ImageBanner: req.body.imagebanner,
-                IsTopview: req.body.istopview,
+                IsTopview: req.body.istopview ? req.body.istopview : "N/A",
                 createdAt : new Date().toISOString(),
             })
             return newfilm.save().then(film =>{
@@ -283,8 +283,8 @@ export function GetAllFilmCategories(req,res){
 }
 
 export function GetFilmBySearch(req,res){
-    var re = new RegExp(req.body.search,"g");
-    film.find({ name: re}).limit(req.body.limit).exec().then(docs => {
+    var re = new RegExp(req.params.filmname.toLowerCase(),"g");
+    film.find({lowername: re}).limit(req.body.limit).exec().then(docs => {
         if (docs) {
             return res.status(200).json({
                 success: true,

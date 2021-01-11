@@ -6,29 +6,43 @@ import cloudinary from '../ulti/cloudinary.js'
 import resizeimage from '../ulti/resizeimage.js'
 const __dirname = path.resolve();
 
-export function UploadImage (req,res,next) {
-    if (req.body.setwidth != null && req.body.setheight != null){
-        resizeimage(__dirname + "/uploads/" + req.file.filename, 'jpg', req.body.setimagewidth , req.body.setimageheight);
-    }
-    cloudinary.v2.uploader.upload(__dirname + "/uploads/" + req.file.filename, {quality : 40} ,(err,result)=>{
+export async function UploadImage (req,res,next) {
+    cloudinary.v2.uploader.upload(__dirname + "/uploads/" + req.files[0].filename, {quality : 40} ,(err,result)=>{
         if (result) {
             const imageUpload = new image({
                 _id: mongoose.Types.ObjectId(),
-                name: req.body.imagename,
+                name: req.files[0].filename,
                 url: result.url,
-                handle: req.user.username,
+                handle: req.user.email,
                 createdAt : new Date().toISOString(),
             });
             return imageUpload.save().then((data) => {
                 if (data) {
                     req.body.imageurl = result.url;
-                    next();
+                    cloudinary.v2.uploader.upload(__dirname + "/uploads/" +
+                     req.files[1].filename, {quality : 40} ,(err,result2)=>{
+                        if (result2){
+                            const imageUpload2 = new image({
+                                _id: mongoose.Types.ObjectId(),
+                                name: req.files[1].filename,
+                                url: result2.url,
+                                handle: req.user.email,
+                                createdAt : new Date().toISOString(),
+                            });
+                            imageUpload2.save().then((data2) => {
+                                if (data2){
+                                    req.body.imagebanner = result2.url;
+                                    console.log("ok");
+                                    next();
+                                }
+                            })
+                        }
+                    })
                 }else{
                     return res.status(400).json({
                         message: 'Upload Image Failed',
                     })
                 }
-
             })
         }else{
             return res.status(400).json({

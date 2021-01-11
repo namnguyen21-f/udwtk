@@ -56,7 +56,7 @@ const filmSchema = new mongoose.Schema({
         trim: true
     },
     Views: {
-        type: Number,
+        type: String ,
         trim: true
     },
     Image: {

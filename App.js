@@ -94,6 +94,7 @@ app.get('/signup', function(req, res) {
 
 
 
+
 app.get('/blog', function(req, res) {
   res.render('pages/blog', {
 
@@ -116,6 +117,24 @@ app.get('/anime/:animeName',function(req,res){
   .then(response => response.json())
   .then(data => {
     res.render('pages/animedetail', {animeData : data.data});
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+  
+})
+
+app.get('/search/anime/:animeName',function(req,res){
+  fetch(stringEB + `/api/search/anime/${req.params.animeName}`,{
+    method: 'POST', 
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({limit: 10}) 
+  })
+  .then(response => response.json())
+  .then(data => {
+    res.render('pages/searchpage', {animeData : data.data, se: req.params.animeName});
   })
   .catch((error) => {
     console.error('Error:', error);

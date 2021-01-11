@@ -1,0 +1,61 @@
+.mainSection {
+  min-height: calc(100vh - 176px);
+}
+
+.card {
+  background: transparent !important;
+  border: 0;
+}
+
+.card .card__img .card-img-top {
+  width: 100%;
+  height: auto;
+}
+
+.container-fluid {
+  background-color: rgb(7, 7, 32);
+}
+
+.beforeList {
+  margin-right: 40px;
+}
+
+.card {
+  position: relative;
+}
+
+.showfilm > .col {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
+.card .card_detail {
+  position: absolute;
+  top: 0;
+  left: calc(100% - 15px);
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  background: #fff;
+}
+
+.menuHome {
+  margin: 20px 0 40px 0;
+}
+
+.card-text {
+  color: #fff;
+}
+
+.card_detail * {
+  color: #222;
+}
+
+.rating {
+  text-align: center;
+}
+
+.rating a {
+  color: #e89f12;
+  font-size: 24px;
+}

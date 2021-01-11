@@ -2,11 +2,36 @@
 <html lang="en">
   <head>
     <%- include('../partials/head.ejs') %>
-    <link href="/css/login.css" rel="stylesheet" type="text/css">
+    <link href="/css/searchpage.css" rel="stylesheet" type="text/css">
   </head>
   <body class="container-fluid" style="padding: 0;">
     <%- include('../partials/header.ejs') %>
-    
+    <div class="container-fluid">
+      <div class="container mainSection">
+        <nav class="menuHome">
+          <i class="fa fa-home" style="color: #e53637;"></i>
+          <a href="#">Home</a> <span> > Search > </span> <p style="display: inline; color:#b7b7b7;"><%= se %></p>
+        </nav>
+        <div class="showfilm row">
+          <div class="col col-8">
+            <% if(animeData.length == 0){ %>
+              <h1>NOT FOUND ANY RESULT</h1>
+            <% } else{ %>  
+              <% animeData.forEach(function(ele) { %>
+                <div class="col col-lg-4 col-md-4 col-sm-6 card ">
+                  <div class="card__img">
+                    <img class="card-img-top" src=<%= ele.Image%> alt="image"> 
+                  </div>
+                  <a href="/anime/<%= ele.name%>" class="card-text"><%= ele.name %></a>
+                </div>
+              <% }) %>
+           <% } %>
+          </div>
+          
+          
+        </div>
+      </div>
+    </div>
     <%- include('../partials/footer.ejs') %>
     <script type="text/javascript">
       
