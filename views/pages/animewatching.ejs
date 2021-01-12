@@ -13,36 +13,22 @@
     <div class="container mainSection">
         <nav class="menuHome">
             <i class="fa fa-home" style="color: #e53637;"></i>
-            <a href="#">Home</a>
+            <a href="/">Home</a>
             <span> > </span>
-            <a href="#">Categories</a>
-            <span> > </span>
-            <a>Romance</a>
+            <a href="#">Anime</a>
             <span> > </span>
             <p style="display: inline; color:#b7b7b7;"><%= animeData.name %></p>
         </nav>
         <div class="videoCenter" style="margin: 45px 0;">
             <video width="100%" controls>
-                <source src="https://res.cloudinary.com/dk5lunsyj/video/upload/v1608695741/y2mate.com_-_Capone_-_Oh_No_Lyrics__360p_zcgowl.mp4" type="video/mp4">
+                <source src=<%= videoUrl %> type="video/mp4">
             </video>
             <div style="margin-top: 30px;">
                 <h5 style="margin-bottom: 15px; margin-top: 25px;">LIST NAME</h5>
-                <a href="#">Ep 01</a>
-                <a href="#">Ep 02</a>
-                <a href="#">Ep 03</a>
-                <a href="#">Ep 04</a>
-                <a href="#">Ep 05</a>
-                <a href="#">Ep 06</a>
-                <a href="#">Ep 07</a>
-                <a href="#">Ep 08</a>
-                <a href="#">Ep 09</a>
-                <a href="#">Ep 10</a>
-                <a href="#">Ep 11</a>
-                <a href="#">Ep 12</a>
-                <a href="#">Ep 13</a>
-                <a href="#">Ep 14</a>
-                <a href="#">Ep 15</a>
-                <a href="#">Ep 16</a>
+                <% for (var i=1; i <= animeData.Episode.split("/")[0]; i++) {%>
+                    <a href="/anime/<%= animeData.name %>/watching/0<%= i %>">Ep <%= i %></a>
+                <% } %>
+            
             </div>
         </div>
         <div class="row">
@@ -50,38 +36,13 @@
                 <div class="review">
                     <h5 style="margin-bottom: 20px;">REVIEWS</h5>
                     <div>
-                        <img src="https://res.cloudinary.com/dk5lunsyj/image/upload/v1606723081/personal-user-illustration-_2x_sfrrum.png" alt="Image">
-                        <div>
-                            <h6>Chris Curry- <span>1 Hour ago</span></h6>
-                            <p>whachikan Just noticed that someone categorized this as belonging to the genre "demons" LOL</p>
-                        </div>
-                    </div>
-                    <div>
-                        <img src="https://res.cloudinary.com/dk5lunsyj/image/upload/v1606723081/personal-user-illustration-_2x_sfrrum.png" alt="Image">
-                        <div>
-                            <h6>Lewis Mann- <span>5 Hour ago</span></h6>
-                            <p>Finally it came out ages ago</p>
-                        </div>
-                        <img src="https://res.cloudinary.com/dk5lunsyj/image/upload/v1606723081/personal-user-illustration-_2x_sfrrum.png" alt="Image">
-                        <div>
-                            <h6>Louis Tyler- <span>20 Hour ago</span></h6>
-                            <p>Where is the episode 15 ? Slow update! Tch</p>
-                        </div>
-                        <img src="https://res.cloudinary.com/dk5lunsyj/image/upload/v1606723081/personal-user-illustration-_2x_sfrrum.png" alt="Image">
-                        <div>
-                            <h6>Chris Curry- <span>1 Hour ago</span></h6>
-                            <p>whachikan Just noticed that someone categorized this as belonging to the genre "demons" LOL</p>
-                        </div>
-                        <img src="https://res.cloudinary.com/dk5lunsyj/image/upload/v1606723081/personal-user-illustration-_2x_sfrrum.png" alt="Image">
-                        <div>
-                            <h6>Lewis Mann- <span>5 Hour ago</span></h6>
-                            <p>Finally it came out ages ago</p>
-                        </div>
-                        <img src="https://res.cloudinary.com/dk5lunsyj/image/upload/v1606723081/personal-user-illustration-_2x_sfrrum.png" alt="Image">
-                        <div>
-                            <h6>Louis Tyler- <span>20 Hour ago</span></h6>
-                            <p>Where is the episode 15 ? Slow update! Tch</p>
-                        </div>
+                        <% animeData.comment.forEach(function(item,index) { %>
+                            <img src="https://res.cloudinary.com/dk5lunsyj/image/upload/v1606723081/personal-user-illustration-_2x_sfrrum.png" alt="Image">
+                            <div>
+                                <h6><%= item.username %> --  <span><%= item.time %></span></h6>
+                                <p><%= item.title %></p>
+                            </div>
+                        <% }) %>  
                     </div>
                 </div>
             </div>

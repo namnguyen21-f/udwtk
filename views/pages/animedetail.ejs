@@ -17,7 +17,7 @@
                 <span> > </span>
                 <a href="#">Categories</a>
                 <span> > </span>
-                <p style="display: inline; color:#b7b7b7;">Romance</p>
+                <p style="display: inline; color:#b7b7b7;"><%= animeData.name %></p>
             </nav>
         
             <div class="info row" style="margin-bottom: 40px;">
@@ -67,7 +67,7 @@
                     </div>
                     <div class="chooseButton">
                         <button style="border-radius: 5%;" onclick="followClicked()"><i class="fa fa-heart"></i>&nbsp;FOLLOW</button>
-                        <a href="/anime/<%= animeData.name %>/watching" style="border-radius: 5% 0 0 5%; margin-left: 10px;">WATCH NOW</a>
+                        <a href="/anime/<%= animeData.name %>/watching/01" style="border-radius: 5% 0 0 5%; margin-left: 10px;">WATCH NOW</a>
                         <button style="border-radius: 0 5% 5% 0;"><i class="fa fa-angle-right"></i></button>
         
                     </div>
@@ -112,7 +112,7 @@
         const form = document.getElementById("register");
         document.getElementById("submitComment").addEventListener('click', () =>{
             $.ajax({
-                url: '/api/anime/' + window.location.href.split("/")[window.location.href.split("/").length - 1] + "/comment/add",
+                url: `/api/anime/${window.location.href.split("/")[window.location.href.split("/").length - 1]}/comment/add`,
                 headers :{
                     'Authorization' : window.localStorage.getItem("authorization"),
                 },
@@ -122,14 +122,13 @@
                 type: 'POST',
                 contentType: 'application/json',
                 success: function (data) {
-                    console.log(data);
+                    location.reload();
                 },
                 error: function(err) {
                     if (err.responseJSON.message == "Token is not available"){
                         alert("You have to login to use this feature")
                     }
                 }
-
             });
         })
 

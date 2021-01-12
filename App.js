@@ -101,16 +101,17 @@ app.get('/blog', function(req, res) {
   });
 });
 
-app.get('/anime/:animeName/watching', function(req, res) {
-  fetch(stringEB + `/api/anime/${req.params.animeName}`)
+app.get('/anime/:animeName/watching/:ep', function(req, res) {
+  fetch(stringEB + `/api/anime/${req.params.animeName}/${req.params.ep}`)
   .then(response => response.json())
   .then(data => {
-    res.render('pages/animewatching', {animeData : data.data});
+    res.render('pages/animewatching', {animeData : data.data, videoUrl : data.videoUrl});
   })
   .catch((error) => {
     console.error('Error:', error);
   });
 });
+
 
 app.get('/anime/:animeName',function(req,res){
   fetch(stringEB +`/api/anime/${req.params.animeName}`)
@@ -139,6 +140,17 @@ app.get('/search/anime/:animeName',function(req,res){
   .catch((error) => {
     console.error('Error:', error);
   });
+})
+
+app.get('/search/anime/categories/:field',function(req,res){
+  fetch(stringEB + `/api/search/anime/categories/${req.params.field}`)
+  .then(response => response.json())
+  .then(data => {
+    res.render('pages/searchpage', {animeData : data.data, se: req.params.field});
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
   
 })
 
@@ -150,7 +162,7 @@ app.get('/upload/anime', function(req, res) {
 
 
 
-app.listen(process.env.PORT , (request, respond) => {
+app.listen(process.env.PORT | 3000 , (request, respond) => {
   console.log(`Our server is live on $. Yay!`);
 });
 

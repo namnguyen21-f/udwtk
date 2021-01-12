@@ -51,8 +51,14 @@ body {
 }
 
 .chooseButton a {
-  text-decoration: none;
+  text-decoration: none !important;
 }
+
+.chooseButton a:hover{
+  color: rgb(0, 183, 255);
+}
+
+
 
 .chooseButton button,
 .chooseButton a {

@@ -275,6 +275,7 @@ export async function GetOneFilm(req,res){
         }
         return rs;
     }   
+
     film.findOne({name: req.params.filmname}).populate('comment').exec((err, doc) =>{
         if (err){
             return res.status(400).json({
@@ -285,6 +286,53 @@ export async function GetOneFilm(req,res){
             handleComment(doc.comment).then(rs =>{
                 var data = doc.toObject();
                 data.comment = rs;
+                return res.status(200).json({
+                    success: true,
+                    data: data,
+                });
+            });
+        }
+    })
+}
+
+
+export async function GetOneFilmEp(req,res){
+    async function handleComment(comment){
+        const rs = [];
+        for (let i=0;i< comment.length; i++){
+            var obj = {};
+            let time = timeDifference(new Date().getTime() , comment[i].updatedAt.getTime());
+            await user.findOne({email : comment[i].handle}).then(doc =>{
+                if (doc){
+                    obj.username = doc.username;
+                    obj.time = time;
+                }
+            })
+            obj.title = comment[i].title;
+            rs.push(obj);
+        }
+        return rs;
+    }   
+
+    await film.findOne({name: req.params.filmname}).populate('comment').populate("ep").exec((err, doc) =>{
+        if (err){
+            return res.status(400).json({
+                success: false,
+            });
+        }
+        if (doc){
+            handleComment(doc.comment).then(rs =>{
+                var data = doc.toObject();
+                data.comment = rs;
+                for (let i=0;i< doc.ep.length;i++){
+                    if (doc.ep[i].index == parseInt(req.params.ep)){
+                        return res.status(200).json({
+                            success: true,
+                            data: data,
+                            videoUrl: doc.ep[i].videoUrl,
+                        });
+                    }
+                }
                 return res.status(200).json({
                     success: true,
                     data: data,
@@ -329,6 +377,30 @@ export function GetAllFilmCategories(req,res){
 export function GetFilmBySearch(req,res){
     var re = new RegExp(req.params.filmname.toLowerCase(),"g");
     film.find({lowername: re}).limit(req.body.limit).exec().then(docs => {
+        if (docs) {
+            return res.status(200).json({
+                success: true,
+                data : docs,
+            })
+        }else{
+            return res.status(400).json({
+                success: true,
+                message: "Not found any result"
+            })
+        }
+    }).catch((error) => {
+        console.log(error);
+        res.status(500).json({
+        success: false,
+        message: 'Server error. Please try again.',
+        error: error.message,
+      });
+    });;
+}
+
+export function GetFilmByCategories(req,res){
+    var re = new RegExp(req.params.field ,"g");
+    film.find({ Gerne: re}).exec().then(docs => {
         if (docs) {
             return res.status(200).json({
                 success: true,
