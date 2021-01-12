@@ -162,7 +162,7 @@ app.get('/upload/anime', function(req, res) {
 
 
 
-app.listen(process.env.PORT | 3000 , (request, respond) => {
+app.listen(process.env.PORT, (request, respond) => {
   console.log(`Our server is live on $. Yay!`);
 });
 
