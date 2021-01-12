@@ -51,8 +51,7 @@ router.get('/anime/:filmname/:ep', GetOneFilmEp);
 router.post('/anime/:filmname/comment/add', authenticateToken , addCommentFilm)
 router.get('/anime/:filmname/comment', GetCommentFilm);
 
-//
-router.post('/anime/:filmname/like',authenticateToken , upLikeFilm); 
-router.post('/anime/:filmname/unlike', authenticateToken , downLikeFilm);
+router.post('/anime/:filmname/like',authenticateToken , upLikeFilm); //call api to like fim
+router.post('/anime/:filmname/unlike', authenticateToken , downLikeFilm); //call api to unlike film
 
 export default router;

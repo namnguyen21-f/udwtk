@@ -1,8 +1,12 @@
-review img {
+.review img {
   float: left;
   border-radius: 50%;
   width: 60px;
   height: auto;
+}
+
+body {
+  position: relative;
 }
 
 .review div div {
@@ -60,6 +64,11 @@ review img {
   margin-bottom: 30px;
 }
 
+#myVideo {
+  position: relative;
+  z-index: 999;
+}
+
 .videoCenter div a {
   display: inline-block;
   padding: 10px 20px;
@@ -73,4 +82,26 @@ review img {
 .videoCenter a:hover {
   background-color: white;
   color: black;
+}
+
+.videoHandle * {
+  color: #333;
+}
+
+.offlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 99;
+}
+
+.videoHandle {
+  align-items: center;
+}
+
+.light {
+  font-size: 15px;
+  outline: none;
+  border: 0;
 }

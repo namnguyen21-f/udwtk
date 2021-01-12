@@ -1,95 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <%- include('../partials/head.ejs') %>
-    <link href="/css/login.css" rel="stylesheet" type="text/css">
-  </head>
-  <body class="container-fluid" style="padding: 0;">
-    <%- include('../partials/header.ejs') %>
-    <section class="banner text-white">
-      <div class="banner-container">
-          <div class="img-banner"></div>
-          <div class="text-banner text-center w-100">
-              <h1 class="text-signup-banner font-weight-bold">LOGIN</h1><br>
-              <p class="text-welcome-banner h4">Welcome to the official Anime blog.</p>
+
+<head>
+  <%- include('../partials/head.ejs') %>
+  <link href="/css/login.css" rel="stylesheet" type="text/css">
+</head>
+
+<body class="container-fluid" style="padding: 0;">
+  <%- include('../partials/header.ejs') %>
+  <section class="banner text-white">
+    <div class="banner-container">
+      <div class="img-banner"></div>
+      <div class="text-banner text-center w-100">
+        <h1 class="text-signup-banner font-weight-bold">LOGIN</h1><br>
+        <p class="text-welcome-banner h4">Welcome to the official Anime blog.</p>
+      </div>
+    </div>
+  </section>
+  <div class="container">
+    <section class="signup-body">
+      <div class="signup-body-container">
+        <div class="row">
+          <div class="signup-container col-6 text-white">
+            <h3 class="signup-header">LOGIN</h3>
+            <form id="register" action="#">
+              <div class="input-email">
+                <input class="input-email-field" id="email" type="email" placeholder="Email address"><span><i
+                    class="fa fa-envelope text-muted" aria-hidden="true"></i></span>
+              </div>
+              <div class="input-password">
+                <input class="input-password-field" id="password" type="password" placeholder="Password"><span><i
+                    class="fa fa-lock text-muted" aria-hidden="true"></i></span>
+              </div>
+              <button class="text-white submit-signup-button" type="submit">
+                LOGIN NOW
+              </button>
+            </form>
+            <p>Not have an account?<a href="/signup">Signup</a></p>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo hic dolorum sit illo consequatur sunt
+              quisquam consectetur expedita ullam eveniet!</p>
           </div>
+          <div class="login-with-container col-6 text-white">
+            <h3 class="login-with-header3">Login With</h3>
+            <div class="col text-center">
+              <div class="row">
+                <a href="#" class="facebook text-white"><i class="fa fa-facebook" aria-hidden="true"></i>SIGN IN WITH
+                  FACEBOOK</a>
+              </div>
+              <div class="row">
+                <a href="#" class="g-signin2 google text-white" data-onsuccess="onSignInGoogle"></a>
+              </div>
+              <div class="row">
+                <a href="#" class="twitter text-white"><i class="fa fa-twitter" aria-hidden="true"></i>SIGN
+                  IN WITH TWITTER</a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
-    <div class="container">
-      <section class="signup-body">
-        <div class="signup-body-container">
-            <div class="row">
-                <div class="signup-container col-6 text-white">
-                    <h3 class="signup-header">LOGIN</h3>
-                    <form id="register" action="#">
-                        <div class="input-email">
-                            <input class="input-email-field" id="email" type="email" placeholder="Email address"><span><i class="fa fa-envelope text-muted" aria-hidden="true"></i></span>
-                        </div>
-                        <div class="input-password">
-                            <input class="input-password-field" id="password" type="password" placeholder="Password"><span><i class="fa fa-lock text-muted" aria-hidden="true"></i></span>
-                        </div>
-                        <button class="text-white submit-signup-button" type="submit">
-                          LOGIN NOW
-                        </button>
-                    </form>
-                    <p>Not have an account?<a href="/signup">Signup</a></p>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo hic dolorum sit illo consequatur sunt quisquam consectetur expedita ullam eveniet!</p>
-                </div>
-                <div class="login-with-container col-6 text-white">
-                    <h3 class="login-with-header3">Login With</h3>
-                    <div class="col text-center">
-                        <div class="row">
-                            <a href="#" class="facebook text-white"><i class="fa fa-facebook"
-                                    aria-hidden="true"></i>SIGN IN WITH FACEBOOK</a>
-                        </div>
-                        <div class="row">
-                            <a href="#" class="g-signin2 google text-white" data-onsuccess="onSignInGoogle"></a>
-                        </div>
-                        <div class="row">
-                            <a href="#" class="twitter text-white"><i class="fa fa-twitter" aria-hidden="true"></i>SIGN
-                                IN WITH TWITTER</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-      </section>
-    </div>
-    <%- include('../partials/footer.ejs') %>
-    <script type="text/javascript">
-      const form = document.getElementById("register");
-      form.addEventListener('submit',(e)=>{
-        e.preventDefault();
-        const data = {};
-        $.ajax({
-          url: '/api/login',
-          data: JSON.stringify({email : document.getElementById('email').value,  
-          password : document.getElementById('password').value,}),
-          processData: false,
-          type: 'POST',
-          contentType: 'application/json',
-          success: function (data) {
-            localStorage.setItem('authorization','Bearer ' + data.token);
-            window.location.href = "/";
-          }
-        });
-      })
+  </div>
+  <%- include('../partials/footer.ejs') %>
+  <script type="text/javascript">
+    const form = document.getElementById("register");
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = {};
+      $.ajax({
+        url: '/api/login',
+        data: JSON.stringify({
+          email: document.getElementById('email').value,
+          password: document.getElementById('password').value,
+        }),
+        processData: false,
+        type: 'POST',
+        contentType: 'application/json',
+        success: function (data) {
+          localStorage.setItem('authorization', 'Bearer ' + data.token);
 
-      function onSignInGoogle(googleUser){
-        var profile = googleUser.getBasicProfile();
+        }
+      }).then(() => {
         $.ajax({
-          url: '/api/createaccount',
-          data: JSON.stringify({email : profile.getEmail(),  
-          username : profile.getName()}),
+          url: '/api/user/getlike',
           processData: false,
           type: 'POST',
+          headers: {
+            'Authorization': localStorage.getItem("authorization"),
+          },
           contentType: 'application/json',
           success: function (data) {
-            localStorage.setItem('authorization','Bearer ' + data.token);
+            document.cookie = "fl=" + data.docs;
             window.location.href = "/";
           }
-        });
-      }
-    </script>
-  </body>
+        })
+      })
+    })
+
+    function onSignInGoogle(googleUser) {
+      var profile = googleUser.getBasicProfile();
+      $.ajax({
+        url: '/api/createaccount',
+        data: JSON.stringify({
+          email: profile.getEmail(),
+          username: profile.getName()
+        }),
+        processData: false,
+        type: 'POST',
+        contentType: 'application/json',
+        success: function (data) {
+          localStorage.setItem('authorization', 'Bearer ' + data.token);
+        }
+      }).then(() => {
+        $.ajax({
+          url: '/api/user/getlike',
+          processData: false,
+          type: 'POST',
+          headers: {
+            'Authorization': localStorage.getItem("authorization"),
+          },
+          contentType: 'application/json',
+          success: function (data) {
+            document.cookie = "fl=" + data.docs;
+            window.location.href = "/";
+          }
+        })
+      });
+    }
+  </script>
+</body>
+
 </html>

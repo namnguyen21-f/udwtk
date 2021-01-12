@@ -20,10 +20,22 @@
             <p style="display: inline; color:#b7b7b7;"><%= animeData.name %></p>
         </nav>
         <div class="videoCenter" style="margin: 45px 0;">
-            <video width="100%" controls>
+            <video id="myVideo" width="100%" controls>
                 <source src=<%= videoUrl %> type="video/mp4">
+                <track kind="subtitles" src="subtitles_en.vtt" srclang="en">
             </video>
-
+            <div class="videoHandle row">
+                <div class="speed">
+                    <label for="playback"></label>
+                    <select name="playback" id="playback">
+                        <option value="0.25">0.25x</option>
+                        <option value="0.5">0.5x</option>
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                    </select>
+                </div>
+                <div class="light"><button id="offlightbtn">Off Light</button></div>
+            </div>
             <div style="margin-top: 30px;">
                 <h5 style="margin-bottom: 15px; margin-top: 25px;">LIST NAME</h5>
                 <% for (var i=1; i <= animeData.Episode.split("/")[0]; i++) {%>
@@ -51,5 +63,32 @@
     </div>
     
     <%- include('../partials/footer.ejs') %>
+    <script>
+        
+        document.getElementById("playback").addEventListener("click", (e) =>{
+            var vid = document.getElementById("myVideo");
+            vid.playbackRate = parseFloat(document.getElementById("playback").value); 
+        })
+        document.getElementById("offlightbtn").addEventListener("click", (e) =>{
+            var div = document.createElement("div");
+            div.className = "offlight";
+            div.id = "offlight";
+            div.setAttribute("style", "width:" + document.body.clientWidth +"px; height:" +  document.body.clientHeight + "px;");
+            document.body.append(div);
+        })
+
+        document.onkeydown = function(evt) {
+            evt = evt || window.event;
+            var isEscape = false;
+            if ("key" in evt) {
+                isEscape = (evt.key === "Escape" || evt.key === "Esc");
+            } else {
+                isEscape = (evt.keyCode === 27);
+            }
+            if (isEscape) {
+                document.getElementById("offlight").remove();
+            }
+        };
+    </script>
 </body>
 </html>
