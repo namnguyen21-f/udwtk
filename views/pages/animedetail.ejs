@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link href="/css/animedetail.css" rel="stylesheet" type="text/css">
     <%- include('../partials/head.ejs') %>
 </head>
+
 <body>
     <%- include('../partials/header.ejs') %>
     <div class="container-fluid">
@@ -19,7 +21,7 @@
                 <span> > </span>
                 <p style="display: inline; color:#b7b7b7;">Romance</p>
             </nav>
-        
+
             <div class="info row" style="margin-bottom: 40px;">
                 <div class="col-lg-3 info__img">
                     <img src=<%= animeData.Image %> alt="Image">
@@ -27,7 +29,7 @@
                 <div class="col-lg-9">
                     <div class="titleContent row">
                         <div class="col-lg-9 col-md-9">
-                            <h2><%= animeData.name %></h2>
+                            <h2 id="anime-name"><%= animeData.name %></h2>
                             <p>フェイト／ステイナイト, Feito／sutei naito</p>
                         </div>
                         <div class="rating col-lg-3 col-md-3">
@@ -44,13 +46,13 @@
                         <div class="row container explainCenter">
                             <div class="row col-lg-6 col-md-6 beforeList">
                                 <ul class="explain">
-                                    <li >Type: <span><%= animeData.type %></span></li>
+                                    <li>Type: <span><%= animeData.type %></span></li>
                                     <li>Studios: <span><%= animeData.Studios %></span></li>
                                     <li>Date aired: <span><%= animeData.DateAired %></span></li>
                                     <li>Status: <span><%= animeData.Status %></span></li>
                                     <li>Genre: <span><%= animeData.Genre %></span></li>
                                 </ul>
-                                
+
                             </div>
                             <div class="row col-lg-6 col-md-6">
                                 <ul class="explain">
@@ -60,34 +62,34 @@
                                     <li>Quality: <span><%= animeData.Quality %></span></li>
                                     <li>Views: <span><%= animeData.Views %></span></li>
                                 </ul>
-                                
+
                             </div>
                         </div>
-                        
+
                     </div>
                     <div class="chooseButton">
-                        <button style="border-radius: 5%;" onclick="followClicked()"><i class="fa fa-heart"></i>&nbsp;FOLLOW</button>
-                        <a href="/anime/<%= animeData.name %>/watching" style="border-radius: 5% 0 0 5%; margin-left: 10px;">WATCH NOW</a>
+                        <button style="border-radius: 5%;" id="follow-button" onclick="followClicked()"><i class="fa fa-heart"></i>FOLLOW</button>
+                        <a href="/anime/<%= animeData.name %>/watching" 
+                            style="border-radius: 5% 0 0 5%; margin-left: 10px;">WATCH NOW</a>
                         <button style="border-radius: 0 5% 5% 0;"><i class="fa fa-angle-right"></i></button>
-        
+
                     </div>
-                    
-        
                 </div>
             </div>
-        
+
             <div class="row">
                 <div class="col-lg-8 col-md-8">
                     <div class="review">
-                        <h5 style="margin-bottom: 20px;">REVIEWS</h5>  
+                        <h5 style="margin-bottom: 20px;">REVIEWS</h5>
                         <div>
                             <% animeData.comment.forEach(function(item,index) { %>
-                                <img src="https://res.cloudinary.com/dk5lunsyj/image/upload/v1606723081/personal-user-illustration-_2x_sfrrum.png" alt="Image">
-                                <div>
-                                    <h6><%= item.username %> --  <span><%= item.time %></span></h6>
-                                    <p><%= item.title %></p>
-                                </div>
-                            <% }) %>  
+                            <img src="https://res.cloudinary.com/dk5lunsyj/image/upload/v1606723081/personal-user-illustration-_2x_sfrrum.png"
+                                alt="Image">
+                            <div>
+                                <h6><%= item.username %> -- <span><%= item.time %></span></h6>
+                                <p><%= item.title %></p>
+                            </div>
+                            <% }) %>
                         </div>
                     </div>
                     <div class="comment" style="margin-top: 80px;">
@@ -99,33 +101,37 @@
                 <div class="topViews col-lg-4 col-md-4">
                     <h5 class="row col-lg-12" style="margin-bottom: 20px;">YOU MIGHT LIKE...</h5>
                     <div class="col-lg-12 topViews__item">
-                        <img src="https://res.cloudinary.com/dk5lunsyj/image/upload/v1606483849/oryfft0dyuy6cc2umfm7.jpg" alt="image">    
+                        <img src="https://res.cloudinary.com/dk5lunsyj/image/upload/v1606483849/oryfft0dyuy6cc2umfm7.jpg"
+                            alt="image">
                         <a href="#">Boruto: Naruto next generations</a>
-                    </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    </div>
     <%- include('../partials/footer.ejs') %>
     <script>
         const form = document.getElementById("register");
-        document.getElementById("submitComment").addEventListener('click', () =>{
+        document.getElementById("submitComment").addEventListener('click', () => {
             $.ajax({
-                url: '/api/anime/' + window.location.href.split("/")[window.location.href.split("/").length - 1] + "/comment/add",
-                headers :{
-                    'Authorization' : window.localStorage.getItem("authorization"),
+                url: '/api/anime/' + window.location.href.split("/")[window.location.href.split("/")
+                    .length - 1] + "/comment/add",
+                headers: {
+                    'Authorization': window.localStorage.getItem("authorization"),
                 },
-                data: JSON.stringify({title: document.getElementById('userComment').value,  
-                type: "film"}),
+                data: JSON.stringify({
+                    title: document.getElementById('userComment').value,
+                    type: "film"
+                }),
                 processData: false,
                 type: 'POST',
                 contentType: 'application/json',
                 success: function (data) {
                     console.log(data);
                 },
-                error: function(err) {
-                    if (err.responseJSON.message == "Token is not available"){
+                error: function (err) {
+                    if (err.responseJSON.message == "Token is not available") {
                         alert("You have to login to use this feature")
                     }
                 }
@@ -133,11 +139,83 @@
             });
         })
 
+        // check và set follow 
+        let listFollowed = []
+        let currentAnimeName = ""
+        
+        if (localStorage.getItem("authorization") != null) {
+            temp = document.cookie.replace("fl=", "")
+            listFollowed = temp.split(",");
+
+            currentAnimeName = document.getElementById("anime-name").textContent
+            verifiedFollow()
+        }
+
+        function verifiedFollow() {
+
+            let followButton = document.getElementById('follow-button')
+            if (listFollowed.includes(currentAnimeName)) {
+                followButton.innerHTML = 'FOLLOWED<i class="fa fa-check"></i>'
+                followButton.style.backgroundColor = '#00ff00'
+            } else {
+                followButton.innerHTML = '<i class="fa fa-heart"></i>FOLLOW'
+                followButton.style.backgroundColor = '#e53637'
+            }
+
+        }
+
         function followClicked() {
             if (localStorage.getItem("authorization") == null) {
-                window.location.href = '/login'
+                window.location.href = '/login' 
+                return
+            } else {
+                // Liked
+                if (listFollowed.includes(currentAnimeName)) {
+                    listFollowed.splice(listFollowed.indexOf(currentAnimeName), 1)
+                    //document.cookie.replace("fl=", listFollowed)
+                    setUnfollowAPI()
+                } else { // Not like
+                    listFollowed.push(currentAnimeName)
+                    //document.cookie.replace("fl=", listFollowed)
+                    setFollowAPI()
+                }
+                document.cookie = "fl=" + listFollowed + ";path=/"
+                verifiedFollow()
             }
         };
+
+        function setFollowAPI() {
+            $.ajax({
+                url: '/api/anime/' + currentAnimeName + "/like",
+                processData: false,
+                type: 'POST',
+                headers: {
+                    'Authorization': localStorage.getItem("authorization"),
+                },
+                contentType: 'application/json',
+                success: function (data) {
+                    //verifiedFollow()
+                }
+            })
+        }
+
+        function setUnfollowAPI() {
+            $.ajax({
+                url: '/api/anime/' + currentAnimeName + "/unlike",
+                processData: false,
+                type: 'POST',
+                headers: {
+                    'Authorization': localStorage.getItem("authorization"),
+                },
+                contentType: 'application/json',
+                success: function (data) {
+                    //verifiedFollow()
+                }
+            })
+        }
+
+
+        // end check và set follow
     </script>
 </body>
 

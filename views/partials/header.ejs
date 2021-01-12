@@ -1,23 +1,23 @@
 <script>
-    if (localStorage.getItem("authorization") != null){
-        
+    if (localStorage.getItem("authorization") != null) {
         $.ajax({
-          url: '/api/getuser',
-          processData: false,
-          type: 'POST',
-          headers: {
-            'Authorization': localStorage.getItem("authorization"),
-        },
-          contentType: 'application/json',
-          success: function (data) {
-            document.getElementById("user_name").innerHTML = data.user.username; 
-            document.querySelector(".auTrue").style.display = 'block';   
-            document.querySelector(".auFalse").style.display = 'none'; 
-        }
-
-
-    });
-    } 
+            url: '/api/getuser',
+            processData: false,
+            type: 'POST',
+            headers: {
+                'Authorization': localStorage.getItem("authorization"),
+            },
+            contentType: 'application/json',
+            success: function (data) {
+                document.getElementById("user_name").innerHTML = data.user.username;
+                document.querySelector(".auTrue").style.display = 'block';
+                document.querySelector(".auFalse").style.display = 'none';
+            },
+            error: function(result){
+                localStorage.removeItem("authorization");
+            }
+        })
+    }
 </script>
 
 <nav class="linkMain">
@@ -29,7 +29,8 @@
             <div class="d-flex align-items-center">
                 <a href="/" class="linkChild">Homepage</a>
                 <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Catetories<span class="carret"></span> </button>
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Catetories<span
+                            class="carret"></span> </button>
                     <ul class="dropdown-menu">
                         <li><a href="#">Categories</a></li>
                         <li><a href="/anime/One Punch Man">Anime Details</a></li>
@@ -41,17 +42,20 @@
                 <a href="#" class="linkChild">Contacts</a>
             </div>
             <div class="linkMain__feauture">
-                <a type="button" class="linkChild" data-toggle="collapse" href="#search"><i class="fa fa-search" aria-hidden="true"></i></a>
+                <a type="button" class="linkChild" data-toggle="collapse" href="#search"><i class="fa fa-search"
+                        aria-hidden="true"></i></a>
                 <div class="collapse" id="search">
                     <div class="d-flex">
                         <input type="text" name="search" placeholder="Search Film">
                         <button class="searchbtn"><i class="fa fa-search" aria-hidden="true"></i></button>
                     </div>
                 </div>
-                <a type="button" class="linkChild" data-toggle="collapse" href="#account"><i class="fa fa-user" aria-hidden="true"></i></a>
+                <a type="button" class="linkChild" data-toggle="collapse" href="#account"><i class="fa fa-user"
+                        aria-hidden="true"></i></a>
                 <div class="collapse" id="account">
                     <div class="auTrue">
-                        <img class="user_image" src="https://res.cloudinary.com/dk5lunsyj/image/upload/v1606723081/personal-user-illustration-_2x_sfrrum.png">
+                        <img class="user_image"
+                            src="https://res.cloudinary.com/dk5lunsyj/image/upload/v1606723081/personal-user-illustration-_2x_sfrrum.png">
                         <span id="user_name"></span>
                         <ul class="nav flex-column">
                             <li class="nav-item">
@@ -81,27 +85,28 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">FAQ & Policy</a>
                         </li>
-                    </ul>    
+                    </ul>
                 </div>
             </div>
         </div>
-    </div> 
+    </div>
 </nav>
 
 
 <script>
-    document.getElementById("signoutbtn").addEventListener('click',() => {
+    document.getElementById("signoutbtn").addEventListener('click', () => {
         localStorage.removeItem('authorization');
         window.location.href = "/";
     })
 
-    document.querySelector(".searchbtn").addEventListener('click',() => {
+    document.querySelector(".searchbtn").addEventListener('click', () => {
         window.location.href = "/anime/search/" + document.querySelector('input[name="search"]').value;
     })
+
     function signOut() {
         var auth2 = gapi.auth2.getAuthInstance();
         auth2.signOut().then(function () {
-        console.log('User signed out.');
+            console.log('User signed out.');
         });
     }
 </script>
